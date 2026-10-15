@@ -1,0 +1,1140 @@
+[
+  {
+    "id": "steps_01_20/01",
+    "title": "最小模型对话",
+    "path": "learning/steps_01_20/step_01_basic_chat.md",
+    "code": "learning/steps_01_20/step_01_basic_chat.py",
+    "scripts": [
+      "learning/steps_01_20/step_01_basic_chat.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_01_basic_chat",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "steps_01_20/02",
+    "title": "最小 FastAPI 接口",
+    "path": "learning/steps_01_20/step_02_fastapi_chat.md",
+    "code": "learning/steps_01_20/step_02_fastapi_chat.py",
+    "scripts": [
+      "learning/steps_01_20/step_02_fastapi_chat.py"
+    ],
+    "command": "python -m uvicorn learning.steps_01_20.step_02_fastapi_chat:app --reload",
+    "network": true,
+    "access": "真实外部请求（可能收费）；启动后提交有效问题才调用模型"
+  },
+  {
+    "id": "steps_01_20/03",
+    "title": "输入校验",
+    "path": "learning/steps_01_20/step_03_input_validation.md",
+    "code": "learning/steps_01_20/step_03_input_validation.py",
+    "scripts": [
+      "learning/steps_01_20/step_03_input_validation.py"
+    ],
+    "command": "python -m uvicorn learning.steps_01_20.step_03_input_validation:app --reload",
+    "network": true,
+    "access": "真实外部请求（可能收费）；启动后提交有效问题才调用模型"
+  },
+  {
+    "id": "steps_01_20/04",
+    "title": "多轮会话",
+    "path": "learning/steps_01_20/step_04_conversation_memory.md",
+    "code": "learning/steps_01_20/step_04_conversation_memory.py",
+    "scripts": [
+      "learning/steps_01_20/step_04_conversation_memory.py"
+    ],
+    "command": "python -m uvicorn learning.steps_01_20.step_04_conversation_memory:app --reload",
+    "network": true,
+    "access": "真实外部请求（可能收费）；启动后提交有效问题才调用模型"
+  },
+  {
+    "id": "steps_01_20/05",
+    "title": "第一次工具调用",
+    "path": "learning/steps_01_20/step_05_tool_calling.md",
+    "code": "learning/steps_01_20/step_05_tool_calling.py",
+    "scripts": [
+      "learning/steps_01_20/step_05_tool_calling.py"
+    ],
+    "command": "python -m uvicorn learning.steps_01_20.step_05_tool_calling:app --reload",
+    "network": true,
+    "access": "真实外部请求（可能收费）；启动后提交有效问题才调用模型"
+  },
+  {
+    "id": "steps_01_20/06",
+    "title": "流式输出",
+    "path": "learning/steps_01_20/step_06_streaming.md",
+    "code": "learning/steps_01_20/step_06_streaming.py",
+    "scripts": [
+      "learning/steps_01_20/step_06_streaming.py"
+    ],
+    "command": "python -m uvicorn learning.steps_01_20.step_06_streaming:app --reload",
+    "network": true,
+    "access": "真实外部请求（可能收费）；启动后提交有效问题才调用模型"
+  },
+  {
+    "id": "steps_01_20/07",
+    "title": "正式项目分层",
+    "path": "learning/steps_01_20/step_07_project_map.md",
+    "code": "app/api/chat.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_chat_api_regression -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/08",
+    "title": "错误处理",
+    "path": "learning/steps_01_20/step_08_error_handling.md",
+    "code": "app/api/chat.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_chat_api_regression -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/09",
+    "title": "首个单元测试",
+    "path": "learning/steps_01_20/step_09_first_test.md",
+    "code": "learning/steps_01_20/step_09_first_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_09_first_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_09_first_test",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/10",
+    "title": "参数化测试",
+    "path": "learning/steps_01_20/step_10_parameterized_test.md",
+    "code": "learning/steps_01_20/step_10_parameterized_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_10_parameterized_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_10_parameterized_test",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/11",
+    "title": "模拟模型测试",
+    "path": "learning/steps_01_20/step_11_mock_model_test.md",
+    "code": "learning/steps_01_20/step_11_mock_model_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_11_mock_model_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_11_mock_model_test",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/12",
+    "title": "真实 API 集成检查",
+    "path": "learning/steps_01_20/step_12_real_api_test.md",
+    "code": "learning/steps_01_20/step_12_real_api_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_12_real_api_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_12_real_api_test",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "steps_01_20/13",
+    "title": "HTTP 接口测试",
+    "path": "learning/steps_01_20/step_13_fastapi_test.md",
+    "code": "learning/steps_01_20/step_13_fastapi_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_13_fastapi_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_13_fastapi_test",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/14",
+    "title": "Agent 工具循环",
+    "path": "learning/steps_01_20/step_14_agent_loop.md",
+    "code": "app/services/llm_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_llm_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/15",
+    "title": "多个工具",
+    "path": "learning/steps_01_20/step_15_multiple_tools.md",
+    "code": "app/services/llm_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_llm_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/16",
+    "title": "工具选择评测",
+    "path": "learning/steps_01_20/step_16_tool_selection_eval.md",
+    "code": "learning/steps_01_20/step_16_tool_selection_eval.py",
+    "scripts": [
+      "learning/steps_01_20/step_16_tool_selection_eval.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_16_tool_selection_eval",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "steps_01_20/17",
+    "title": "工具参数评测",
+    "path": "learning/steps_01_20/step_17_tool_argument_eval.md",
+    "code": "learning/steps_01_20/step_17_tool_argument_eval.py",
+    "scripts": [
+      "learning/steps_01_20/step_17_tool_argument_eval.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_17_tool_argument_eval",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "steps_01_20/18",
+    "title": "工具参数安全",
+    "path": "learning/steps_01_20/step_18_tool_safety_test.md",
+    "code": "learning/steps_01_20/step_18_tool_safety_test.py",
+    "scripts": [
+      "learning/steps_01_20/step_18_tool_safety_test.py"
+    ],
+    "command": "python -m learning.steps_01_20.step_18_tool_safety_test",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/19",
+    "title": "滑动窗口",
+    "path": "learning/steps_01_20/step_19_memory_window.md",
+    "code": "app/services/conversation_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_conversation_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "steps_01_20/20",
+    "title": "结构化事实",
+    "path": "learning/steps_01_20/step_20_structured_memory.md",
+    "code": "app/services/conversation_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_structured_fact_retention -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/01",
+    "title": "理解 RAG",
+    "path": "learning/rag/step_01_rag_concept.md",
+    "code": "app/services/rag_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_rag_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/02",
+    "title": "建立知识库",
+    "path": "learning/rag/step_02_knowledge_markdown.md",
+    "code": "app/rag/document_loader.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_document_loader -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/03",
+    "title": "文档加载",
+    "path": "learning/rag/step_03_document_loader.md",
+    "code": "learning/rag/step_03_load_documents.py",
+    "scripts": [
+      "learning/rag/step_03_load_documents.py"
+    ],
+    "command": "python -m learning.rag.step_03_load_documents",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/04",
+    "title": "文本切分",
+    "path": "learning/rag/step_04_chunker.md",
+    "code": "learning/rag/step_04_split_documents.py",
+    "scripts": [
+      "learning/rag/step_04_split_documents.py"
+    ],
+    "command": "python -m learning.rag.step_04_split_documents",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/05",
+    "title": "字符 n-gram 检索",
+    "path": "learning/rag/step_05_ngram_retriever.md",
+    "code": "learning/rag/step_05_retrieve_top_one.py",
+    "scripts": [
+      "learning/rag/step_05_retrieve_top_one.py"
+    ],
+    "command": "python -m learning.rag.step_05_retrieve_top_one",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/06",
+    "title": "分数与 Top-K",
+    "path": "learning/rag/step_06_scores_and_top_k.md",
+    "code": "learning/rag/step_06_show_all_scores.py",
+    "scripts": [
+      "learning/rag/step_06_show_all_scores.py"
+    ],
+    "command": "python -m learning.rag.step_06_show_all_scores",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07",
+    "title": "构建 RAG Prompt",
+    "path": "learning/rag/step_07_prompt_context.md",
+    "code": "learning/rag/step_07_build_prompt.py",
+    "scripts": [
+      "learning/rag/step_07_build_prompt.py"
+    ],
+    "command": "python -m learning.rag.step_07_build_prompt",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07b_01",
+    "title": "Prompt 的区域职责",
+    "path": "learning/rag/step_07b_01_prompt_roles.md",
+    "code": "app/rag/prompt_builder.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_prompt_builder -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07b_02",
+    "title": "Grounding",
+    "path": "learning/rag/step_07b_02_grounding_rule.md",
+    "code": "app/rag/prompt_builder.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_prompt_builder -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07b_03",
+    "title": "资料不足",
+    "path": "learning/rag/step_07b_03_missing_context.md",
+    "code": "learning/rag/step_07b_03_missing_context.py",
+    "scripts": [
+      "learning/rag/step_07b_03_missing_context.py"
+    ],
+    "command": "python -m learning.rag.step_07b_03_missing_context",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07b_04",
+    "title": "不可信上下文",
+    "path": "learning/rag/step_07b_04_untrusted_context.md",
+    "code": "learning/rag/step_07b_04_untrusted_context.py",
+    "scripts": [
+      "learning/rag/step_07b_04_untrusted_context.py"
+    ],
+    "command": "python -m learning.rag.step_07b_04_untrusted_context",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/07b_05",
+    "title": "答案与来源",
+    "path": "learning/rag/step_07b_05_answer_and_sources.md",
+    "code": "learning/rag/step_07b_05_answer_and_sources.py",
+    "scripts": [
+      "learning/rag/step_07b_05_answer_and_sources.py"
+    ],
+    "command": "python -m learning.rag.step_07b_05_answer_and_sources",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/08",
+    "title": "RAGService",
+    "path": "learning/rag/step_08_rag_service.md",
+    "code": "learning/rag/step_08_rag_service.py",
+    "scripts": [
+      "learning/rag/step_08_rag_service.py"
+    ],
+    "command": "python -m learning.rag.step_08_rag_service",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/09",
+    "title": "程序级拒答",
+    "path": "learning/rag/step_09_reliable_refusal.md",
+    "code": "learning/rag/step_09_reliable_refusal.py",
+    "scripts": [
+      "learning/rag/step_09_reliable_refusal.py"
+    ],
+    "command": "python -m learning.rag.step_09_reliable_refusal",
+    "network": false,
+    "access": "当前固定无资料示例不请求模型；更改问题或知识库后可能进入真实生成分支"
+  },
+  {
+    "id": "rag/10",
+    "title": "结构化来源",
+    "path": "learning/rag/step_10_sources.md",
+    "code": "learning/rag/step_10_sources.py",
+    "scripts": [
+      "learning/rag/step_10_sources.py"
+    ],
+    "command": "python -m learning.rag.step_10_sources",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/11",
+    "title": "RAG HTTP 接口",
+    "path": "learning/rag/step_11_rag_api.md",
+    "code": "learning/rag/step_11_rag_api.py",
+    "scripts": [
+      "learning/rag/step_11_rag_api.py"
+    ],
+    "command": "python -m learning.rag.step_11_rag_api",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/12",
+    "title": "回归检查",
+    "path": "learning/rag/step_12_route_regression.md",
+    "code": "learning/rag/step_12_route_regression.py",
+    "scripts": [
+      "learning/rag/step_12_route_regression.py"
+    ],
+    "command": "python -m learning.rag.step_12_route_regression",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/13",
+    "title": "知识库工具",
+    "path": "learning/rag/step_13_knowledge_tool.md",
+    "code": "learning/rag/step_13_knowledge_tool.py",
+    "scripts": [
+      "learning/rag/step_13_knowledge_tool.py"
+    ],
+    "command": "python -m learning.rag.step_13_knowledge_tool",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/14",
+    "title": "知识库 Tool Loop",
+    "path": "learning/rag/step_14_agent_knowledge_loop.md",
+    "code": "learning/rag/step_14_agent_knowledge_loop.py",
+    "scripts": [
+      "learning/rag/step_14_agent_knowledge_loop.py"
+    ],
+    "command": "python -m learning.rag.step_14_agent_knowledge_loop",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/14b",
+    "title": "真实工具选择",
+    "path": "learning/rag/step_14b_real_tool_selection.md",
+    "code": "learning/rag/step_14b_real_tool_selection.py",
+    "scripts": [
+      "learning/rag/step_14b_real_tool_selection.py"
+    ],
+    "command": "python -m learning.rag.step_14b_real_tool_selection",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/15a",
+    "title": "关键词边界",
+    "path": "learning/rag/step_15a_keyword_limit.md",
+    "code": "learning/rag/step_15a_keyword_limit.py",
+    "scripts": [
+      "learning/rag/step_15a_keyword_limit.py"
+    ],
+    "command": "python -m learning.rag.step_15a_keyword_limit",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15b",
+    "title": "Embedding 概念",
+    "path": "learning/rag/step_15b_embedding_concept.md",
+    "code": "learning/rag/step_15b_embedding_concept.py",
+    "scripts": [
+      "learning/rag/step_15b_embedding_concept.py"
+    ],
+    "command": "python -m learning.rag.step_15b_embedding_concept",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15c",
+    "title": "余弦相似度",
+    "path": "learning/rag/step_15c_cosine_similarity.md",
+    "code": "learning/rag/step_15c_cosine_similarity.py",
+    "scripts": [
+      "learning/rag/step_15c_cosine_similarity.py"
+    ],
+    "command": "python -m learning.rag.step_15c_cosine_similarity",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15d_recall",
+    "title": "Recall@K",
+    "path": "learning/rag/step_15d_recall_at_k.md",
+    "code": "learning/rag/step_15d_recall_at_k.py",
+    "scripts": [
+      "learning/rag/step_15d_recall_at_k.py"
+    ],
+    "command": "python -m learning.rag.step_15d_recall_at_k",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15d_precision",
+    "title": "Precision@K",
+    "path": "learning/rag/step_15d_precision_at_k.md",
+    "code": "learning/rag/step_15d_precision_at_k.py",
+    "scripts": [
+      "learning/rag/step_15d_precision_at_k.py"
+    ],
+    "command": "python -m learning.rag.step_15d_precision_at_k",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15e",
+    "title": "重排",
+    "path": "learning/rag/step_15e_rerank.md",
+    "code": "learning/rag/step_15e_rerank.py",
+    "scripts": [
+      "learning/rag/step_15e_rerank.py"
+    ],
+    "command": "python -m learning.rag.step_15e_rerank",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/15f",
+    "title": "幻觉排查",
+    "path": "learning/rag/step_15f_hallucination.md",
+    "code": "learning/rag/step_15f_hallucination_cases.py",
+    "scripts": [
+      "learning/rag/step_15f_hallucination_cases.py"
+    ],
+    "command": "python -m learning.rag.step_15f_hallucination_cases",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16",
+    "title": "检查 Embedding 支持",
+    "path": "learning/rag/step_16_check_embedding_support.md",
+    "code": "learning/rag/step_16_check_embedding_support.py",
+    "scripts": [
+      "learning/rag/step_16_check_embedding_support.py"
+    ],
+    "command": "python -m learning.rag.step_16_check_embedding_support",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/16b",
+    "title": "百炼 Embedding",
+    "path": "learning/rag/step_16b_dashscope_embedding_smoke_test.md",
+    "code": "learning/rag/step_16b_dashscope_embedding_smoke_test.py",
+    "scripts": [
+      "learning/rag/step_16b_dashscope_embedding_smoke_test.py"
+    ],
+    "command": "python -m learning.rag.step_16b_dashscope_embedding_smoke_test",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/16c",
+    "title": "Query 与 Document",
+    "path": "learning/rag/step_16c_query_document_retrieval.md",
+    "code": "learning/rag/step_16c_query_document_retrieval.py",
+    "scripts": [
+      "learning/rag/step_16c_query_document_retrieval.py"
+    ],
+    "command": "python -m learning.rag.step_16c_query_document_retrieval",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/16d",
+    "title": "EmbeddingService",
+    "path": "learning/rag/step_16d_embedding_service.md",
+    "code": "app/services/embedding_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_embedding_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16e",
+    "title": "文档向量缓存",
+    "path": "learning/rag/step_16e_document_embedding_cache.md",
+    "code": "app/rag/embedding_cache.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_embedding_cache -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16f",
+    "title": "Dense Retriever",
+    "path": "learning/rag/step_16f_dense_retriever.md",
+    "code": "app/rag/dense_retriever.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_dense_retriever -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16g",
+    "title": "RRF 混合召回",
+    "path": "learning/rag/step_16g_hybrid_retriever.md",
+    "code": "app/rag/hybrid_retriever.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_hybrid_retriever -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16h_01",
+    "title": "评测集与基线",
+    "path": "learning/rag/step_16h_01_eval_dataset_and_ngram_baseline.md",
+    "code": "learning/rag/step_16h_01_ngram_eval_baseline.py",
+    "scripts": [
+      "learning/rag/step_16h_01_ngram_eval_baseline.py"
+    ],
+    "command": "python -m learning.rag.step_16h_01_ngram_eval_baseline",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16h_02",
+    "title": "检索器对比",
+    "path": "learning/rag/step_16h_02_compare_retrievers.md",
+    "code": "learning/rag/step_16h_02_compare_retrievers.py",
+    "scripts": [
+      "learning/rag/step_16h_02_compare_retrievers.py"
+    ],
+    "command": "python -m learning.rag.step_16h_02_compare_retrievers",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/16i_01",
+    "title": "向量库决策",
+    "path": "learning/rag/step_16i_01_vector_database_decision.md",
+    "code": "app/rag/dense_retriever.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_dense_retriever -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/16i_02",
+    "title": "正式接入决策",
+    "path": "learning/rag/step_16i_02_integration_decision.md",
+    "code": "app/services/rag_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_rag_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17a",
+    "title": "无答案负例",
+    "path": "learning/rag/step_17a_no_answer_eval.md",
+    "code": "learning/rag/step_17a_no_answer_eval.py",
+    "scripts": [
+      "learning/rag/step_17a_no_answer_eval.py"
+    ],
+    "command": "python -m learning.rag.step_17a_no_answer_eval",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17b",
+    "title": "Dense 分数边界",
+    "path": "learning/rag/step_17b_dense_score_eval.md",
+    "code": "learning/rag/step_17b_dense_score_eval.py",
+    "scripts": [
+      "learning/rag/step_17b_dense_score_eval.py"
+    ],
+    "command": "python -m learning.rag.step_17b_dense_score_eval",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/17c_01",
+    "title": "阈值取舍",
+    "path": "learning/rag/step_17c_01_threshold_tradeoff.md",
+    "code": "learning/rag/step_17c_01_threshold_tradeoff.py",
+    "scripts": [
+      "learning/rag/step_17c_01_threshold_tradeoff.py"
+    ],
+    "command": "python -m learning.rag.step_17c_01_threshold_tradeoff",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17c_02",
+    "title": "留出验证",
+    "path": "learning/rag/step_17c_02_holdout_eval.md",
+    "code": "learning/rag/step_17c_02_holdout_eval.py",
+    "scripts": [
+      "learning/rag/step_17c_02_holdout_eval.py"
+    ],
+    "command": "python -m learning.rag.step_17c_02_holdout_eval",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17d",
+    "title": "Dense 留出题",
+    "path": "learning/rag/step_17d_dense_holdout.md",
+    "code": "learning/rag/step_17d_dense_holdout.py",
+    "scripts": [
+      "learning/rag/step_17d_dense_holdout.py"
+    ],
+    "command": "python -m learning.rag.step_17d_dense_holdout",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "rag/17e",
+    "title": "证据审计",
+    "path": "learning/rag/step_17e_evidence_audit.md",
+    "code": "learning/rag/step_17e_evidence_audit.py",
+    "scripts": [
+      "learning/rag/step_17e_evidence_audit.py"
+    ],
+    "command": "python -m learning.rag.step_17e_evidence_audit",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17f",
+    "title": "RAG 阶段边界",
+    "path": "learning/rag/step_17f_rag_stage_boundary.md",
+    "code": "app/services/rag_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_rag_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "rag/17g",
+    "title": "RAG 代码复盘",
+    "path": "learning/rag/step_17g_rag_code_recap.md",
+    "code": "learning/rag/step_17g_rag_branch_recap.py",
+    "scripts": [
+      "learning/rag/step_17g_rag_branch_recap.py"
+    ],
+    "command": "python -m learning.rag.step_17g_rag_branch_recap",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18a",
+    "title": "轮数与 Token",
+    "path": "learning/context/step_18a_turn_window_vs_token_budget.md",
+    "code": "learning/context/step_18a_turn_window_vs_token_budget.py",
+    "scripts": [
+      "learning/context/step_18a_turn_window_vs_token_budget.py"
+    ],
+    "command": "python -m learning.context.step_18a_turn_window_vs_token_budget",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18b",
+    "title": "裁剪切片",
+    "path": "learning/context/step_18b_trim_history_slice.md",
+    "code": "learning/context/step_18b_trim_history_slice.py",
+    "scripts": [
+      "learning/context/step_18b_trim_history_slice.py"
+    ],
+    "command": "python -m learning.context.step_18b_trim_history_slice",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18c",
+    "title": "跨窗口事实",
+    "path": "learning/context/step_18c_structured_fact_retention.md",
+    "code": "learning/context/step_18c_structured_fact_retention.py",
+    "scripts": [
+      "learning/context/step_18c_structured_fact_retention.py"
+    ],
+    "command": "python -m learning.context.step_18c_structured_fact_retention",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18d",
+    "title": "摘要记忆",
+    "path": "learning/context/step_18d_summary_memory_role.md",
+    "code": "learning/context/step_18d_summary_memory_role.py",
+    "scripts": [
+      "learning/context/step_18d_summary_memory_role.py"
+    ],
+    "command": "python -m learning.context.step_18d_summary_memory_role",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18e",
+    "title": "摘要触发",
+    "path": "learning/context/step_18e_summary_trigger.md",
+    "code": "learning/context/step_18e_summary_trigger.py",
+    "scripts": [
+      "learning/context/step_18e_summary_trigger.py"
+    ],
+    "command": "python -m learning.context.step_18e_summary_trigger",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18f",
+    "title": "工具结果压缩",
+    "path": "learning/context/step_18f_tool_result_compression.md",
+    "code": "learning/context/step_18f_tool_result_compression.py",
+    "scripts": [
+      "learning/context/step_18f_tool_result_compression.py"
+    ],
+    "command": "python -m learning.context.step_18f_tool_result_compression",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18g",
+    "title": "上下文信任边界",
+    "path": "learning/context/step_18g_context_trust_boundary.md",
+    "code": "learning/context/step_18g_context_trust_boundary.py",
+    "scripts": [
+      "learning/context/step_18g_context_trust_boundary.py"
+    ],
+    "command": "python -m learning.context.step_18g_context_trust_boundary",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18h",
+    "title": "上下文组装",
+    "path": "learning/context/step_18h_context_assembly.md",
+    "code": "learning/context/step_18h_context_assembly.py",
+    "scripts": [
+      "learning/context/step_18h_context_assembly.py"
+    ],
+    "command": "python -m learning.context.step_18h_context_assembly",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18i",
+    "title": "上下文回归",
+    "path": "learning/context/step_18i_context_regression_eval.md",
+    "code": "learning/context/step_18i_context_regression_eval.py",
+    "scripts": [
+      "learning/context/step_18i_context_regression_eval.py"
+    ],
+    "command": "python -m learning.context.step_18i_context_regression_eval",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18j",
+    "title": "上下文复盘",
+    "path": "learning/context/step_18j_context_stage_recap.md",
+    "code": "app/services/conversation_service.py",
+    "scripts": [],
+    "command": "python -m unittest tests.test_conversation_service -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18k",
+    "title": "上下文观测",
+    "path": "learning/context/step_18k_context_metrics.md",
+    "code": "learning/context/step_18k_context_metrics.py",
+    "scripts": [
+      "learning/context/step_18k_context_metrics.py"
+    ],
+    "command": "python -m learning.context.step_18k_context_metrics",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18l",
+    "title": "有限退款偏好",
+    "path": "learning/context/step_18l_long_dialogue_failure.md",
+    "code": "learning/context/step_18l_long_dialogue_failure.py",
+    "scripts": [
+      "learning/context/step_18l_long_dialogue_failure.py"
+    ],
+    "command": "python -m learning.context.step_18l_long_dialogue_failure",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "context/18m",
+    "title": "HTTP 上下文演示",
+    "path": "learning/context/step_18m_http_context_demo.md",
+    "code": "learning/context/step_18m_http_context_demo.py",
+    "scripts": [
+      "learning/context/step_18m_http_context_demo.py"
+    ],
+    "command": "python -m learning.context.step_18m_http_context_demo",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/19a",
+    "title": "LangChain 接口映射",
+    "path": "learning/frameworks/step_19a_langchain_interfaces.md",
+    "code": "learning/frameworks/step_19b_langchain_single_call.py",
+    "scripts": [],
+    "command": "python -m unittest learning.frameworks.test_step_19b_retry -v",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/19b",
+    "title": "LangChain 单次请求",
+    "path": "learning/frameworks/step_19b_langchain_single_call.md",
+    "code": "learning/frameworks/step_19b_langchain_single_call.py",
+    "scripts": [
+      "learning/frameworks/step_19b_langchain_single_call.py"
+    ],
+    "command": "python -m learning.frameworks.step_19b_langchain_single_call",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "frameworks/19c",
+    "title": "单工具往返",
+    "path": "learning/frameworks/step_19c_langchain_order_tool.md",
+    "code": "learning/frameworks/step_19c_langchain_order_tool.py",
+    "scripts": [
+      "learning/frameworks/step_19c_langchain_order_tool.py"
+    ],
+    "command": "python -m learning.frameworks.step_19c_langchain_order_tool",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "frameworks/19d",
+    "title": "工具对象",
+    "path": "learning/frameworks/step_19d_langchain_tool_object.md",
+    "code": "learning/frameworks/step_19d_langchain_tool_object.py",
+    "scripts": [
+      "learning/frameworks/step_19d_langchain_tool_object.py"
+    ],
+    "command": "python -m learning.frameworks.step_19d_langchain_tool_object",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/19e",
+    "title": "工具对象往返",
+    "path": "learning/frameworks/step_19e_tool_object_roundtrip.md",
+    "code": "learning/frameworks/step_19e_tool_object_roundtrip.py",
+    "scripts": [
+      "learning/frameworks/step_19e_tool_object_roundtrip.py"
+    ],
+    "command": "python -m learning.frameworks.step_19e_tool_object_roundtrip",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "frameworks/19f",
+    "title": "Agent 运行器",
+    "path": "learning/frameworks/step_19f_agent_runner.md",
+    "code": "learning/frameworks/step_19f_agent_runner.py",
+    "scripts": [
+      "learning/frameworks/step_19f_agent_runner.py"
+    ],
+    "command": "python -m learning.frameworks.step_19f_agent_runner",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "frameworks/20a",
+    "title": "State",
+    "path": "learning/frameworks/step_20a_langgraph_state.md",
+    "code": "learning/frameworks/step_20a_langgraph_state.py",
+    "scripts": [
+      "learning/frameworks/step_20a_langgraph_state.py"
+    ],
+    "command": "python -m learning.frameworks.step_20a_langgraph_state",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20b",
+    "title": "Node",
+    "path": "learning/frameworks/step_20b_langgraph_node.md",
+    "code": "learning/frameworks/step_20b_langgraph_node.py",
+    "scripts": [
+      "learning/frameworks/step_20b_langgraph_node.py"
+    ],
+    "command": "python -m learning.frameworks.step_20b_langgraph_node",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20c",
+    "title": "Edge",
+    "path": "learning/frameworks/step_20c_langgraph_edge.md",
+    "code": "learning/frameworks/step_20c_langgraph_edge.py",
+    "scripts": [
+      "learning/frameworks/step_20c_langgraph_edge.py"
+    ],
+    "command": "python -m learning.frameworks.step_20c_langgraph_edge",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20d",
+    "title": "条件边",
+    "path": "learning/frameworks/step_20d_conditional_route.md",
+    "code": "learning/frameworks/step_20d_conditional_route.py",
+    "scripts": [
+      "learning/frameworks/step_20d_conditional_route.py"
+    ],
+    "command": "python -m learning.frameworks.step_20d_conditional_route",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20e",
+    "title": "Checkpoint",
+    "path": "learning/frameworks/step_20e_checkpoint.md",
+    "code": "learning/frameworks/step_20e_checkpoint.py",
+    "scripts": [
+      "learning/frameworks/step_20e_checkpoint.py"
+    ],
+    "command": "python -m learning.frameworks.step_20e_checkpoint",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20f",
+    "title": "中断与恢复",
+    "path": "learning/frameworks/step_20f_interrupt_resume.md",
+    "code": "learning/frameworks/step_20f_interrupt_resume.py",
+    "scripts": [
+      "learning/frameworks/step_20f_interrupt_resume.py"
+    ],
+    "command": "python -m learning.frameworks.step_20f_interrupt_resume",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20g",
+    "title": "节点失败",
+    "path": "learning/frameworks/step_20g_node_failure.md",
+    "code": "learning/frameworks/step_20g_node_failure.py",
+    "scripts": [
+      "learning/frameworks/step_20g_node_failure.py"
+    ],
+    "command": "python -m learning.frameworks.step_20g_node_failure",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20h",
+    "title": "Reducer",
+    "path": "learning/frameworks/step_20h_message_reducer.md",
+    "code": "learning/frameworks/step_20h_message_reducer.py",
+    "scripts": [
+      "learning/frameworks/step_20h_message_reducer.py"
+    ],
+    "command": "python -m learning.frameworks.step_20h_message_reducer",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20i",
+    "title": "显式工具循环图",
+    "path": "learning/frameworks/step_20i_tool_loop_graph.md",
+    "code": "learning/frameworks/step_20i_tool_loop_graph.py",
+    "scripts": [
+      "learning/frameworks/step_20i_tool_loop_graph.py"
+    ],
+    "command": "python -m learning.frameworks.step_20i_tool_loop_graph",
+    "network": true,
+    "access": "真实外部请求（可能收费）"
+  },
+  {
+    "id": "frameworks/20j",
+    "title": "原生与图对照",
+    "path": "learning/frameworks/step_20j_native_graph_comparison.md",
+    "code": "learning/frameworks/step_20j_native_graph_comparison.py",
+    "scripts": [
+      "learning/frameworks/step_20j_native_graph_comparison.py"
+    ],
+    "command": "python -m learning.frameworks.step_20j_native_graph_comparison",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20k",
+    "title": "会话接图",
+    "path": "learning/frameworks/step_20k_graph_conversation.md",
+    "code": "learning/frameworks/step_20k_graph_conversation.py",
+    "scripts": [
+      "learning/frameworks/step_20k_graph_conversation.py"
+    ],
+    "command": "python -m learning.frameworks.step_20k_graph_conversation",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20l",
+    "title": "图版 HTTP 演示",
+    "path": "learning/frameworks/step_20l_http_graph_demo.md",
+    "code": "learning/frameworks/step_20l_http_graph_demo.py",
+    "scripts": [
+      "learning/frameworks/step_20l_http_graph_demo.py"
+    ],
+    "command": "python -m learning.frameworks.step_20l_http_graph_demo",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "frameworks/20m",
+    "title": "订单与知识双工具",
+    "path": "learning/frameworks/step_20m_knowledge_tool.md",
+    "code": "learning/frameworks/step_20m_knowledge_tool.py",
+    "scripts": [
+      "learning/frameworks/step_20m_knowledge_tool.py"
+    ],
+    "command": "python -m learning.frameworks.step_20m_knowledge_tool",
+    "network": false,
+    "access": "本地运行（无外部模型请求）"
+  }
+]

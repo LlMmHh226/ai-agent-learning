@@ -1,0 +1,6 @@
+# Complete independent environment, including the application's dependencies.
+-r ../../requirements.in
+langchain>=1,<2
+langchain-core>=1,<2
+langchain-openai>=1,<2
+langgraph>=1,<2

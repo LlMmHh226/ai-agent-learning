@@ -1,0 +1,35 @@
+GET http://127.0.0.1:8000/health
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/api/chat
+Content-Type: application/json
+
+{
+  "message": "请帮我查询订单10001"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/chat/stream
+Content-Type: application/json
+
+{
+  "message": "你好，请介绍一下你自己"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/chat/conversation
+Content-Type: application/json
+
+{
+  "conversation_id": "conversation-001",
+  "message": "我想查订单10002"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/chat/conversation/conversation-001
+Accept: application/json
