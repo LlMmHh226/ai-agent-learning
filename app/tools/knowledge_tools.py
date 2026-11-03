@@ -1,18 +1,4 @@
-from app.rag.chunker import split_documents
-from app.rag.document_loader import load_markdown_documents
-from app.rag.retriever import retrieve
-
-
-KNOWLEDGE_TOOL_TOP_K = 1
-KNOWLEDGE_TOOL_MIN_SCORE = 0.3
-KNOWLEDGE_TOOL_CHUNK_SIZE = 10_000
-
-
-KNOWLEDGE_CHUNKS = split_documents(
-    documents=load_markdown_documents(),
-    chunk_size=KNOWLEDGE_TOOL_CHUNK_SIZE,
-    overlap=0,
-)
+from app.rag.knowledge_retriever import KnowledgeRetrievalError, retrieve_knowledge
 
 
 SEARCH_KNOWLEDGE_BASE_TOOL = {
@@ -20,7 +6,7 @@ SEARCH_KNOWLEDGE_BASE_TOOL = {
     "function": {
         "name": "search_knowledge_base",
         "description": (
-            "搜索本地客服知识库中的商品规格、使用说明和知识文档。"
+            "搜索客服知识库中的商品规格、使用说明和知识文档。"
             "实时订单状态应使用 get_order_status；退货、换货或退款规则"
             "应使用 get_after_sales_policy。"
         ),
@@ -42,7 +28,7 @@ SEARCH_KNOWLEDGE_BASE_TOOL = {
 
 def search_knowledge_base(query: str) -> dict[str, object]:
     """
-    在本地客服知识库中搜索与问题相关的资料。
+    与正式RAG共用检索后端，搜索与问题相关的资料。
 
     参数:
         query:
@@ -60,12 +46,10 @@ def search_knowledge_base(query: str) -> dict[str, object]:
             "message": "知识库查询内容不能为空",
         }
 
-    retrieval_results = retrieve(
-        query=normalized_query,
-        chunks=KNOWLEDGE_CHUNKS,
-        top_k=KNOWLEDGE_TOOL_TOP_K,
-        min_score=KNOWLEDGE_TOOL_MIN_SCORE,
-    )
+    try:
+        retrieval_results = retrieve_knowledge(query=normalized_query)
+    except KnowledgeRetrievalError:
+        return {"error": "知识库检索服务暂时不可用，请稍后重试"}
 
     if not retrieval_results:
         return {

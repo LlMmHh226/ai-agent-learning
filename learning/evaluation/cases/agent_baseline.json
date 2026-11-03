@@ -1,0 +1,386 @@
+{
+  "version": 6,
+  "baseline": "formal_native_agent",
+  "cases": [
+    {
+      "id": "order_tracking_10001",
+      "category": "order",
+      "initial_state": "Use a fresh conversation with empty history and facts.",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-order-tracking-10001",
+        "message": "请查询订单10001的物流单号。"
+      },
+      "expected": {
+        "http_status": 200,
+        "required_tool_call": {
+          "name": "get_order_status",
+          "arguments": {
+            "order_id": "10001"
+          }
+        },
+        "tool_result_fields": {
+          "found": true,
+          "order_id": "10001",
+          "tracking_number": "SF1234567890"
+        },
+        "answer_fact": "明确将SF1234567890作为订单10001的物流单号告知用户；允许不同措辞。",
+        "manual_review": "不能仅按包含字符串判定正确；检查是否否定、错配或编造其他关键订单事实。"
+      },
+      "evidence_required": [
+        "HTTP状态码与响应正文",
+        "实际执行的工具名称、解析后的参数与结果",
+        "最终回答事实核对",
+        "错误或未完成原因（如有）"
+      ],
+      "reference_source": [
+        "app/tools/order_tools.py",
+        "app/repositories/order_repository.py"
+      ]
+    },
+    {
+      "id": "order_not_found_99999",
+      "category": "order",
+      "initial_state": "Use a fresh conversation with empty history and facts.",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-order-not-found-99999",
+        "message": "请查询订单99999的物流单号。"
+      },
+      "expected": {
+        "http_status": 200,
+        "required_tool_call": {
+          "name": "get_order_status",
+          "arguments": {
+            "order_id": "99999"
+          }
+        },
+        "tool_result_fields": {
+          "found": false
+        },
+        "answer_fact": "未找到订单，请用户核对编号，不编造物流号",
+        "manual_review": "不能仅按包含字符串判定正确；检查是否否定、错配或编造其他关键订单事实。"
+      },
+      "evidence_required": [
+        "HTTP状态码与响应正文",
+        "实际执行的工具名称、解析后的参数与结果",
+        "最终回答事实核对",
+        "错误或未完成原因（如有）"
+      ],
+      "reference_source": [
+        "app/tools/order_tools.py",
+        "app/repositories/order_repository.py"
+      ]
+    },
+    {
+      "id": "missing_order_id",
+      "category": "order",
+      "initial_state": "Use a fresh conversation with empty history and facts.",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-missing-order-id",
+        "message": "帮我查一下订单的物流单号。"
+      },
+      "expected": {
+        "http_status": 200,
+        "tool_policy": "none",
+        "required_tool_call": null,
+        "tool_result_fields": {},
+        "answer_fact": "向用户询问订单号，说明取得订单号后才能查询物流信息。",
+        "manual_review": "不得编造物流号或订单状态，不得猜测订单号执行查询，不得把缺少编号说成订单不存在。"
+      },
+      "evidence_required": [
+        "HTTP状态码与响应正文",
+        "实际执行的工具名称、解析后的参数与结果",
+        "最终回答事实核对",
+        "错误或未完成原因（如有）"
+      ],
+      "reference_source": [
+        "app/tools/order_tools.py",
+        "app/repositories/order_repository.py"
+      ]
+    },
+    {
+      "id": "order_followup_10001",
+      "case_version": 2,
+      "category": "multi_turn_order",
+      "initial_state": "第一轮从空历史和空facts的新会话开始；后续轮次使用同一会话。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-order-followup-10001"
+      },
+      "turns": [
+        {
+          "message": "请查询订单10001的状态。",
+          "expected": {
+            "http_status": 200,
+            "tool_policy": "required",
+            "required_tool_call": {
+              "name": "get_order_status",
+              "arguments": {
+                "order_id": "10001"
+              }
+            },
+            "tool_result_fields": {
+              "found": true,
+              "order_id": "10001",
+              "status": "已发货"
+            },
+            "answer_fact": "明确告知订单10001当前状态为已发货。",
+            "manual_review": "必须基于订单工具结果，不错配其他订单或编造送达时间。"
+          }
+        },
+        {
+          "message": "它的物流单号是什么？",
+          "expected": {
+            "http_status": 200,
+            "tool_policy": "optional",
+            "required_tool_call": {
+              "name": "get_order_status",
+              "arguments": {
+                "order_id": "10001"
+              }
+            },
+            "tool_result_fields": {
+              "found": true,
+              "order_id": "10001",
+              "tracking_number": "SF1234567890"
+            },
+            "answer_fact": "将追问中的它关联到订单10001，正确告知物流单号SF1234567890。",
+            "manual_review": "允许复述当前会话上一轮工具已确认的物流号；如果重新调用，必须查10001且结果正确。不得忘记编号再次追问、错配订单或编造/否定物流号。"
+          }
+        }
+      ],
+      "evidence_required": [
+        "两轮实际请求中的conversation_id一致且首轮会话为新会话",
+        "每轮HTTP状态、回答和工具名称、参数、结果",
+        "逐轮事实审核与整体判定，不能只看第二轮答案"
+      ],
+      "reference_source": "app/tools/order_tools.py: FAKE_ORDERS['10001']；app/services/conversation_service.py中的history/facts组装。",
+      "freshness_rule": "本例仅即时复述刚查到的物流号，允许复用；明确要求刷新或最新信息应另设required案例。"
+    },
+    {
+      "id": "order_refresh_10001",
+      "case_version": 1,
+      "category": "multi_turn_order_refresh",
+      "initial_state": "新会话先查询10001状态，再在同一会话明确要求重新查询最新状态。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-order-refresh-10001"
+      },
+      "turns": [
+        {
+          "message": "请查询订单10001的状态。",
+          "expected": {
+            "http_status": 200,
+            "tool_policy": "required",
+            "required_tool_call": {
+              "name": "get_order_status",
+              "arguments": {
+                "order_id": "10001"
+              }
+            },
+            "tool_result_fields": {
+              "found": true,
+              "order_id": "10001",
+              "status": "已发货"
+            },
+            "answer_fact": "根据本轮订单工具结果告知10001状态为已发货。",
+            "manual_review": "不能猜测状态，不错配其他订单，不编造送达时间。"
+          }
+        },
+        {
+          "message": "现在请重新查询一下这个订单的最新状态。",
+          "expected": {
+            "http_status": 200,
+            "tool_policy": "required",
+            "required_tool_call": {
+              "name": "get_order_status",
+              "arguments": {
+                "order_id": "10001"
+              }
+            },
+            "tool_result_fields": {
+              "found": true,
+              "order_id": "10001",
+              "status": "已发货"
+            },
+            "answer_fact": "识别为订单10001，重新调用工具后告知本轮查询到的状态。",
+            "manual_review": "即使状态与上轮相同，也必须有本轮查询证据；不能只重复历史却声称已刷新，不能忘记已提供的订单号。"
+          }
+        }
+      ],
+      "freshness_rule": "第二轮明确要求重新查询最新状态，本轮必须调用订单工具，不接受仅复述历史作为满足刷新要求的证据。",
+      "evidence_required": [
+        "两轮同一个新会话ID",
+        "每轮get_order_status实际执行及10001参数",
+        "第二轮工具结果和答案事实，不仅判断是否出现已发货"
+      ],
+      "reference_source": "app/tools/order_tools.py: get_order_status('10001')；本条用户明确要求重新查询。"
+    },
+    {
+      "id": "after_sales_refund_timing",
+      "case_version": 1,
+      "category": "after_sales",
+      "initial_state": "使用空历史和空facts的新会话；用户只说明已提交退货申请，未说明退货已验收通过。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-after-sales-refund-timing",
+        "message": "我刚提交了退货申请，退款一般多久能到账，会退到哪里？"
+      },
+      "expected": {
+        "http_status": 200,
+        "tool_policy": "required",
+        "required_tool_call": {
+          "name": "get_after_sales_policy",
+          "arguments": {
+            "topic": "退款"
+          }
+        },
+        "tool_result_fields": {
+          "found": true,
+          "topic": "退款",
+          "policy": "退货验收通过后，退款通常会在1至3个工作日内原路退回。"
+        },
+        "answer_fact": "说明退货验收通过后，退款通常在1至3个工作日内原路退回；允许同义措辞，但必须保留起算条件、通常、工作日和原路退回。",
+        "manual_review": "这是一般政策咨询，无需订单号。不得把提交退货申请说成退款计时起点，不得声称该用户已验收通过、退款已发起或已到账，不得承诺必定到账或编造补偿、其他到账路径。额外工具调用需单独检查必要性和依据。"
+      },
+      "evidence_required": [
+        "HTTP状态码与响应正文",
+        "实际执行get_after_sales_policy及topic=退款参数和政策结果",
+        "最终回答是否保留起算条件、时间单位、限定词和到账路径",
+        "额外工具调用、错误或未完成原因（如有）"
+      ],
+      "reference_source": "app/tools/policy_tools.py: AFTER_SALES_POLICIES['退款']及get_after_sales_policy('退款')。"
+    },
+    {
+      "id": "knowledge_keyboard_hot_swap",
+      "case_version": 1,
+      "category": "knowledge_answer_and_citation",
+      "initial_state": "使用空历史和空facts的新会话。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-knowledge-keyboard-hot-swap",
+        "message": "星云机械键盘支持热插拔吗？换轴需要焊接吗？"
+      },
+      "expected": {
+        "http_status": 200,
+        "tool_policy": "required",
+        "argument_match": "nonempty_query",
+        "required_tool_call": {
+          "name": "search_knowledge_base",
+          "arguments": {
+            "query": "星云机械键盘支持热插拔吗？换轴需要焊接吗？"
+          }
+        },
+        "tool_result_fields": {
+          "found": true
+        },
+        "knowledge_evidence": {
+          "source": "products.md",
+          "chunk_id": "products.md#chunk-0",
+          "supporting_text": "支持五脚轴热插拔，更换轴体时不需要焊接。"
+        },
+        "answer_fact": "根据工具返回的商品说明，回答星云机械键盘支持热插拔、换轴不需要焊接，并注明products.md及products.md#chunk-0；允许同义表达。",
+        "manual_review": "query允许保留同一商品和热插拔/换轴意图的改写；机械检查仅验证非空query结构和found，不判断查询含义、results或答案。需核对实际结果中的source、chunk_id、snippet，再核对答案及引用。不得把其他商品的事实套给键盘，不能说需要焊接；若说明轴体规格，应与五脚轴一致。额外工具调用单独核对。"
+      },
+      "evidence_required": [
+        "实际执行search_knowledge_base及query原文，人工核对查询意图",
+        "results中的source、chunk_id、snippet是否支持答案",
+        "最终回答的事实与引用是否一致",
+        "错误或未完成原因（如有）"
+      ],
+      "reference_source": "data/knowledge/products.md的星云机械键盘说明；app/tools/knowledge_tools.py的search_knowledge_base。"
+    },
+    {
+      "id": "knowledge_keyboard_waterproof_unknown",
+      "case_version": 1,
+      "category": "knowledge_insufficient_evidence",
+      "initial_state": "使用空历史和空facts的新会话；用户询问具体防水等级，知识库没有提供IPX等级。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-knowledge-keyboard-waterproof-unknown",
+        "message": "星云机械键盘的防水等级是IPX几？"
+      },
+      "expected": {
+        "http_status": 200,
+        "tool_policy": "required",
+        "argument_match": "nonempty_query",
+        "required_tool_call": {
+          "name": "search_knowledge_base",
+          "arguments": {
+            "query": "星云机械键盘的防水等级是IPX几？"
+          }
+        },
+        "tool_result_fields": {
+          "found": true
+        },
+        "knowledge_evidence": {
+          "source": "products.md",
+          "chunk_id": "products.md#chunk-0",
+          "supporting_text": "本商品没有标注防水或防泼溅能力。"
+        },
+        "answer_fact": "说明资料未标注防水或防泼溅能力，无法确认具体IPX等级，并引用products.md及products.md#chunk-0。",
+        "manual_review": "query允许同一商品和防水等级意图的改写，需审核查询含义及实际results。found=True只说明检索非空，不证明有具体等级。不得编造IPX数字，也不得将未标注推断为IPX0、完全不防水或已认证防水。可以给谨慎建议，但不能冒充已知商品参数。"
+      },
+      "evidence_required": [
+        "实际执行知识库工具及query原文",
+        "检索到商品文档的证据与未标注防水能力的原文",
+        "最终答案是否明确无法确认等级、是否编造数字及引用是否对应",
+        "错误或未完成原因（如有）"
+      ],
+      "reference_source": "data/knowledge/products.md：本商品没有标注防水或防泼溅能力。"
+    },
+    {
+      "id": "knowledge_keyboard_battery_holdout",
+      "case_version": 1,
+      "category": "knowledge_holdout_entity_attribution",
+      "evaluation_split": "holdout",
+      "initial_state": "使用空历史和空facts的新会话；文档未提供键盘续航天数，鼠标段落有约30天续航。不能假定用户问题中的充电前提已由资料确认。",
+      "method": "POST",
+      "path": "/api/chat/conversation",
+      "request": {
+        "conversation_id": "eval-knowledge-keyboard-battery-holdout",
+        "message": "星云机械键盘充满电后能用多少天？"
+      },
+      "expected": {
+        "http_status": 200,
+        "tool_policy": "required",
+        "argument_match": "nonempty_query",
+        "required_tool_call": {
+          "name": "search_knowledge_base",
+          "arguments": {
+            "query": "星云机械键盘充满电后能用多少天？"
+          }
+        },
+        "tool_result_fields": {
+          "found": true
+        },
+        "knowledge_evidence": {
+          "source": "products.md",
+          "chunk_id": "products.md#chunk-0",
+          "supporting_text": "内置可充电电池，充满电后典型续航约 30 天。",
+          "belongs_to": "轻风无线鼠标",
+          "missing_for": "星云机械键盘的续航天数"
+        },
+        "answer_fact": "说明现有资料未提供星云机械键盘的续航天数，无法确认充满电后能用多少天，并注明products.md和对应片段；若提及约30天，必须明确它属于轻风无线鼠标，不能套给键盘。",
+        "manual_review": "query允许保留键盘与续航意图的改写，需审核实际结果中的商品段落归属。不得声称键盘续航约30天或编造其他天数；不能由资料缺失断言键盘有/没有内置电池、支持/不支持充电或只能有线使用。允许同义表述、合理建议及能对应products.md#chunk-0的引用格式。机械检查仅查非空query结构和found，无法自动判定事实归属与答案语义。"
+      },
+      "evidence_required": [
+        "实际知识库工具执行与query含义",
+        "原文中的键盘段落与鼠标段落，以及30天数字属于谁",
+        "最终回答是否明确无法确认键盘续航、是否错配商品事实与引用",
+        "运行源码和知识库哈希与prompt_reference_result是否一致"
+      ],
+      "reference_source": "data/knowledge/products.md：星云机械键盘段落未给续航天数，轻风无线鼠标段落给出典型续航约30天。"
+    }
+  ]
+}

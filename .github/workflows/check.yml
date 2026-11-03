@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        suite: [base, framework]
+        suite: [base, framework, mcp]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -24,6 +24,9 @@ jobs:
       - name: Install independent framework environment
         if: matrix.suite == 'framework'
         run: python -m pip install -r learning/frameworks/requirements.txt
+      - name: Install independent MCP environment
+        if: matrix.suite == 'mcp'
+        run: python -m pip install -r learning/mcp/requirements.txt
       - run: python -m pip check
       - run: python -X utf8 -m scripts.check_docs
       - run: python -X utf8 -m scripts.verify_offline --suite ${{ matrix.suite }}

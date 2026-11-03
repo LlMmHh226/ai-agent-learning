@@ -11,3 +11,7 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+.venv-mcp/
+learning/**/results/
+learning/**/backups/

@@ -1,0 +1,35 @@
+{
+  "date": "teaching-fixture",
+  "knowledge_rows": [
+    {
+      "source": "after_sales.md",
+      "chunk_id": "after_sales.md#chunk-0",
+      "dimensions": 1536
+    },
+    {
+      "source": "after_sales.md",
+      "chunk_id": "after_sales.md#chunk-1",
+      "dimensions": 1536
+    },
+    {
+      "source": "products.md",
+      "chunk_id": "products.md#chunk-0",
+      "dimensions": 1536
+    },
+    {
+      "source": "products.md",
+      "chunk_id": "products.md#chunk-1",
+      "dimensions": 1536
+    },
+    {
+      "source": "shipping.md",
+      "chunk_id": "shipping.md#chunk-0",
+      "dimensions": 1536
+    },
+    {
+      "source": "shipping.md",
+      "chunk_id": "shipping.md#chunk-1",
+      "dimensions": 1536
+    }
+  ]
+}

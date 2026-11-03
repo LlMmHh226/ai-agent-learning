@@ -17,7 +17,7 @@ class RAGServiceTests(unittest.IsolatedAsyncioTestCase):
         complete_mock: AsyncMock,
     ) -> None:
         complete_mock.return_value = "请联系人工客服核查。"
-        service = RAGService()
+        service = RAGService(backend="ngram")
 
         result = await service.chat(
             "物流轨迹超过 48 小时没有更新怎么办？"
@@ -44,7 +44,7 @@ class RAGServiceTests(unittest.IsolatedAsyncioTestCase):
         self,
         complete_mock: AsyncMock,
     ) -> None:
-        service = RAGService(min_score=0.3)
+        service = RAGService(min_score=0.3, backend="ngram")
 
         result = await service.chat("商品有优惠券吗？")
 

@@ -1,12 +1,15 @@
+import asyncio
 from dataclasses import dataclass
 
-from app.rag.chunker import split_documents
+from app.core.config import get_settings
 from app.rag.document_loader import Document, load_markdown_documents
+from app.rag.chunker import split_documents
+from app.rag.knowledge_retriever import retrieve_knowledge
 from app.rag.prompt_builder import (
     RAG_INSUFFICIENT_CONTEXT_RESPONSE,
     build_rag_messages,
 )
-from app.rag.retriever import RetrievalResult, retrieve
+from app.rag.retriever import RetrievalResult
 from app.services.llm_service import llm_service
 
 
@@ -60,63 +63,81 @@ def build_sources(
 class RAGService:
     def __init__(
         self,
-        top_k: int = DEFAULT_RAG_TOP_K,
-        min_score: float = DEFAULT_RAG_MIN_SCORE,
+        top_k: int | None = None,
+        min_score: float | None = None,
         chunk_size: int = DOCUMENT_LEVEL_CHUNK_SIZE,
+        backend: str | None = None,
     ) -> None:
         """
-        初始化 RAG 服务并预先加载本地知识库。
+        初始化 RAG 服务；默认从配置选择检索后端，查询时才访问资料。
 
         参数:
             top_k:
-                每次检索最多返回的知识片段数量。默认值 1 表示只把
-                得分最高的一个结果交给模型。
+                每次检索最多返回的知识片段数量。未指定时，n-gram使用1，
+                pgvector使用配置的PGVECTOR_TOP_K。
 
             min_score:
-                检索结果需要达到的最低相关度。当前默认值 0.3；低于
-                该分数时，Python 会直接返回固定拒答，不调用模型。
+                最低相关度。未指定时，n-gram使用0.3，pgvector使用配置的
+                PGVECTOR_MIN_SCORE。无命中时直接固定拒答，不调用聊天模型。
 
             chunk_size:
-                每个知识片段允许的最大字符数。当前默认值 10000，
-                使每个短 Markdown 文件形成一个文档级 chunk。
+                n-gram本地模式的片段字符数。pgvector直接使用库中已保存的片段。
 
         返回:
-            __init__ 不返回业务数据。它把切分结果保存到 self.chunks，
-            供后续 chat() 调用重复使用。
+            保存检索配置；本地片段在需要时才加载，pgvector不读取Markdown。
         """
-        if top_k <= 0:
+        if top_k is not None and top_k <= 0:
             raise ValueError("top_k 必须大于 0")
-        if not 0.0 <= min_score <= 1.0:
+        if min_score is not None and not 0.0 <= min_score <= 1.0:
             raise ValueError("min_score 必须在 0.0 到 1.0 之间")
-
-        documents = load_markdown_documents()
-        self.chunks: list[Document] = split_documents(
-            documents=documents,
-            chunk_size=chunk_size,
-            overlap=0,
+        if backend is not None and backend not in {"ngram", "pgvector"}:
+            raise ValueError("不支持的知识库检索后端")
+        settings = get_settings()
+        self._chunks: list[Document] | None = None
+        self.chunk_size = chunk_size
+        self.backend = backend or settings.knowledge_retrieval_backend
+        self.top_k = top_k if top_k is not None else (
+            settings.pgvector_top_k if self.backend == "pgvector" else DEFAULT_RAG_TOP_K
         )
-        self.top_k = top_k
-        self.min_score = min_score
+        self.min_score = min_score if min_score is not None else (
+            settings.pgvector_min_score if self.backend == "pgvector" else DEFAULT_RAG_MIN_SCORE
+        )
+
+    @property
+    def chunks(self) -> list[Document]:
+        """保留历史学习材料的本地片段入口；pgvector路径不依赖Markdown文件。"""
+        if self._chunks is None:
+            self._chunks = split_documents(
+                documents=load_markdown_documents(),
+                chunk_size=self.chunk_size,
+                overlap=0,
+            )
+        return self._chunks
+
+    def _retrieve(self, query: str) -> list[RetrievalResult]:
+        backend = self.backend
+        return retrieve_knowledge(
+            query=query,
+            backend=backend,
+            top_k=self.top_k,
+            min_score=self.min_score,
+            chunks=self.chunks if backend == "ngram" else None,
+        )
 
     async def chat(self, query: str) -> RAGResult:
         """
-        检索本地知识库，并让模型根据检索上下文生成回答。
+        从配置的知识库后端检索，并让模型根据检索正文生成回答。
 
         参数:
             query:
-                用户问题。学习脚本直接传入字符串；HTTP 接口从
-                经过校验的请求 message 中取得该值。
+                用户问题；HTTP接口传入经过校验的request.message。
 
         返回:
             RAGResult 对象。answer 保存模型回答或固定拒答，sources
             保存 Python 根据检索结果构建的真实来源列表。
         """
-        retrieval_results = retrieve(
-            query=query,
-            chunks=self.chunks,
-            top_k=self.top_k,
-            min_score=self.min_score,
-        )
+        # Embedding SDK和psycopg均为同步调用，避免阻塞FastAPI事件循环。
+        retrieval_results = await asyncio.to_thread(self._retrieve, query)
         if not retrieval_results:
             return RAGResult(
                 answer=RAG_INSUFFICIENT_CONTEXT_RESPONSE,

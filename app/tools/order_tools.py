@@ -1,20 +1,9 @@
-FAKE_ORDERS: dict[str, dict[str, str]] = {
-    "10001": {
-        "status": "已发货",
-        "product": "机械键盘",
-        "tracking_number": "SF1234567890",
-    },
-    "10002": {
-        "status": "待发货",
-        "product": "无线鼠标",
-        "tracking_number": "",
-    },
-    "10003": {
-        "status": "已完成",
-        "product": "显示器",
-        "tracking_number": "YT9876543210",
-    },
-}
+import logging
+
+from app.repositories.order_repository import OrderRepositoryError, fetch_order_from_db
+
+
+logger = logging.getLogger(__name__)
 
 GET_ORDER_STATUS_TOOL = {
     "type": "function",
@@ -36,7 +25,11 @@ GET_ORDER_STATUS_TOOL = {
 }
 
 def get_order_status(order_id: str) -> dict[str, object]:
-    order = FAKE_ORDERS.get(order_id)
+    try:
+        order = fetch_order_from_db(order_id)
+    except OrderRepositoryError:
+        logger.exception("订单数据库不可用")
+        return {"error": "订单查询服务暂时不可用，请稍后重试"}
 
     if order is None:
         return {

@@ -126,3 +126,84 @@
 - [20l 图版 HTTP 演示](frameworks/step_20l_http_graph_demo.md) — 本地运行（无外部模型请求）
 - [20m 订单与知识双工具](frameworks/step_20m_knowledge_tool.md) — 本地运行（无外部模型请求）
 
+
+## 新增进阶单元（2026-11）
+
+### Web / FastAPI基础补充
+
+需要时补读参数、模型、异步、依赖、生命周期和进程内存。所有接口在一个独立应用中，默认使用演示订单。
+
+- [GET请求与路由](web_basics/step_01_hello.md)
+- [查询参数](web_basics/step_02_query_parameter.md)
+- [路径参数](web_basics/step_03_path_parameter.md)
+- [请求与响应模型](web_basics/step_04_request_response_models.md)
+- [异步与阻塞](web_basics/step_05_async_wait.md)
+- [Depends依赖注入](web_basics/step_06_depends.md)
+- [应用生命周期](web_basics/step_07_lifespan.md)
+- [进程内存](web_basics/step_08_process_memory.md)
+- [HTTP错误与校验](web_basics/step_09_http_errors.md)
+
+### MCP工具连接
+
+先学习角色与stdio，再适配模型工具格式、区分错误、构造循环，最后比较真实模型、HTTP与生命周期。MCP传输真实并不等于模型响应真实。
+
+- [MCP中的角色](mcp/step_21a_mcp_roles.md)
+- [stdio订单服务](mcp/step_21b_local_order.md)
+- [模型格式适配](mcp/step_21c_tool_adapter.md)
+- [MCP错误分层](mcp/step_21d_error_layers.md)
+- [MCP工具循环](mcp/step_21e_mcp_tool_loop.md)
+- [真实模型与MCP](mcp/step_21f_real_model_mcp.md)
+- [Streamable HTTP](mcp/step_21g_http_transport.md)
+- [FastAPI复用MCP连接](mcp/step_21h_fastapi_lifespan.md)
+
+### 正式入口效果评测
+
+先定标准再运行；保留失败，区分机械检查与人工语义审核。案例是教学样例，尚无完整统一模型评测总成绩。运行器默认只预览。
+
+- [定义任务成功](evaluation/step_01_success_criteria.md)
+- [采集正式入口](evaluation/step_02_first_real_run.md)
+- [按案例ID执行](evaluation/step_03_choose_case.md)
+- [缺少订单号](evaluation/step_04_no_order_id.md)
+- [多轮案例](evaluation/step_05_multi_turn.md)
+- [可选工具规则](evaluation/step_06_optional_tools.md)
+- [明确刷新](evaluation/step_07_refresh_case.md)
+- [政策事实](evaluation/step_08_after_sales_policy.md)
+- [知识证据](evaluation/step_09_knowledge_evidence.md)
+- [失败后的Prompt改进](evaluation/step_10_grounding_prompt.md)
+- [留出题与实体归属](evaluation/step_11_holdout_entity_evidence.md)
+
+### Docker入门
+
+安装并实际启动引擎，再理解镜像/容器与端口/数据卷。此仓库不会自动启动或修改你已有的数据库。
+
+- [准备Docker](docker/step_01_install_start.md)
+- [镜像与容器](docker/step_02_image_container.md)
+- [Compose数据库服务](docker/step_03_postgres_service.md)
+
+### PostgreSQL订单持久化
+
+SQL熟练的读者可快速阅读前两课，从Python参数化查询开始。演示与正式代码共享根.env，数据库为独立教学库。
+
+- [连接与SELECT](postgresql/step_01_select.md)
+- [按状态过滤](postgresql/step_02_filter_rows.md)
+- [Python参数化查询](postgresql/step_03_python_order_lookup.md)
+- [工具返回适配](postgresql/step_04_order_tool_result.md)
+- [正式接入订单](postgresql/step_05_wire_formal_tool.md)
+
+### pgvector语义检索与正式接入
+
+先启用扩展并学会入库与检索，再处理切分、来源与知识更新，最后接入正式RAG。入门默认ngram，配置切换后才使用pgvector。V2历史实验与V4数据库向量不可混用。
+
+- [准备向量扩展](pgvector/step_01_prepare_pgvector.md)
+- [建向量表](pgvector/step_02_enable_and_schema.md)
+- [单片段入库](pgvector/step_03_insert_one_chunk.md)
+- [批量入库](pgvector/step_04_batch_insert.md)
+- [问题向量Top-K](pgvector/step_05_query_topk.md)
+- [结果转Prompt](pgvector/step_06_build_messages.md)
+- [按资料生成](pgvector/step_07_generate_answer.md)
+- [程序生成sources](pgvector/step_08_sources.md)
+- [按章节切分](pgvector/step_09_section_chunking.md)
+- [更新计划](pgvector/step_09b_refresh_plan.md)
+- [事务更新向量](pgvector/step_09c_refresh_vectors.md)
+- [正式RAG接入](pgvector/step_10_formal_pgvector.md)
+

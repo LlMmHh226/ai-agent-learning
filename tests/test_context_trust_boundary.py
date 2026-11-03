@@ -2,6 +2,7 @@
 
 import json
 import unittest
+from unittest.mock import patch
 
 from app.services.llm_service import DEFAULT_SYSTEM_PROMPT
 from app.tools.order_tools import get_order_status
@@ -14,7 +15,16 @@ from learning.context.step_18g_context_trust_boundary import (
 
 
 class ContextTrustBoundaryTests(unittest.TestCase):
-    def test_instruction_in_retained_field_stays_in_tool_data(self) -> None:
+    @patch(
+        "app.tools.order_tools.fetch_order_from_db",
+        return_value={
+            "order_id": "10001",
+            "status": "已发货",
+            "product": "机械键盘",
+            "tracking_number": "SF1234567890",
+        },
+    )
+    def test_instruction_in_retained_field_stays_in_tool_data(self, _lookup) -> None:
         """无参数；检查保留字段中的指令未进入system，测试运行器接收None。"""
         original_result = get_order_status("10001")
         injected_result = dict(original_result)

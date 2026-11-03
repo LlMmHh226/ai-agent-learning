@@ -1,5 +1,7 @@
 # 17f · RAG 阶段边界
 
+> 本课讲解早期n-gram/独立实验阶段；当前整合版另支持可选pgvector，见 [数据库进阶](../../docs/database.md)。本课按默认ngram配置运行。
+
 [课程目录](../README.md) · [运行与排错](../../docs/setup.md)
 
 ## 学习目标

@@ -66,6 +66,10 @@ class EmbeddingService:
         text_type: EmbeddingTextType,
     ) -> list[list[float]]:
         """向当前 Provider 发起一次请求；失败时不自动重试。"""
+        request_options: dict[str, int] = {}
+        if self.model in {"text-embedding-v3", "text-embedding-v4"}:
+            request_options["dimension"] = self.dimensions
+
         try:
             response = TextEmbedding.call(
                 model=self.model,
@@ -73,6 +77,7 @@ class EmbeddingService:
                 api_key=self.api_key,
                 text_type=text_type,
                 request_timeout=20,
+                **request_options,
             )
         except Exception as error:
             raise EmbeddingServiceError(

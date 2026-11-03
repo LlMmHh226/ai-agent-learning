@@ -1,9 +1,11 @@
 import json
+import threading
 import unittest
 from types import SimpleNamespace
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, patch
 
 from app.services.llm_service import LLMService
+from app.rag.knowledge_retriever import retrieve_knowledge
 
 
 class FakeAssistantMessage:
@@ -36,6 +38,24 @@ def make_response(message):
 
 class LLMServiceToolTests(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
+        knowledge_patch = patch(
+            "app.tools.knowledge_tools.retrieve_knowledge",
+            side_effect=lambda **kwargs: retrieve_knowledge(**kwargs, backend="ngram"),
+        )
+        knowledge_patch.start()
+        self.addCleanup(knowledge_patch.stop)
+        # 工具循环测试使用固定订单记录，不要求本地启动PostgreSQL。
+        order_patch = patch(
+            "app.tools.order_tools.fetch_order_from_db",
+            return_value={
+                "order_id": "10001",
+                "status": "已发货",
+                "product": "机械键盘",
+                "tracking_number": "SF1234567890",
+            },
+        )
+        self.order_lookup = order_patch.start()
+        self.addCleanup(order_patch.stop)
         self.service = object.__new__(LLMService)
         self.service.model = "test-model"
         self.service.client = SimpleNamespace(
@@ -51,6 +71,7 @@ class LLMServiceToolTests(unittest.IsolatedAsyncioTestCase):
         )
         self.assertTrue(result["found"])
         self.assertEqual(result["status"], "已发货")
+        self.order_lookup.assert_called_once_with("10001")
 
     def test_execute_tool_rejects_invalid_arguments(self):
         result = self.service._execute_tool("get_order_status", "not-json")
@@ -76,6 +97,15 @@ class LLMServiceToolTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("五脚轴热插拔", first_result["snippet"])
 
     async def test_chat_completes_tool_call_loop(self):
+        event_loop_thread = threading.get_ident()
+        lookup_threads = []
+        order = self.order_lookup.return_value
+
+        def record_lookup_thread(order_id):
+            lookup_threads.append(threading.get_ident())
+            return order
+
+        self.order_lookup.side_effect = record_lookup_thread
         tool_call = SimpleNamespace(
             id="call-1",
             function=SimpleNamespace(
@@ -99,6 +129,8 @@ class LLMServiceToolTests(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(second_call_messages[-1]["role"], "tool")
         self.assertIn("已发货", second_call_messages[-1]["content"])
+        self.assertEqual(len(lookup_threads), 1)
+        self.assertNotEqual(lookup_threads[0], event_loop_thread)
 
     async def test_chat_completes_knowledge_tool_call_loop(self):
         tool_call = SimpleNamespace(

@@ -69,7 +69,9 @@ def configure_dummy_environment() -> None:
                       LLM_MODEL='local-test', DASHSCOPE_API_KEY='test-only',
                       EMBEDDING_PROVIDER='dashscope', EMBEDDING_MODEL='text-embedding-v2',
                       EMBEDDING_DIMENSIONS='1536', LANGSMITH_TRACING='false',
-                      LANGCHAIN_TRACING_V2='false', LANGCHAIN_TRACING='false')
+                      LANGCHAIN_TRACING_V2='false', LANGCHAIN_TRACING='false',
+                      ORDER_STORAGE_BACKEND='demo', KNOWLEDGE_RETRIEVAL_BACKEND='ngram',
+                      POSTGRES_PASSWORD='test-only')
     for key in ('LANGSMITH_API_KEY', 'LANGCHAIN_API_KEY'):
         os.environ.pop(key, None)
 
@@ -78,27 +80,40 @@ def blocked(*args, **kwargs):
     raise AssertionError('离线检查禁止网络连接；请为外部响应增加模拟。')
 
 
+def local_mcp_connect(sock, address):
+    if isinstance(address, tuple) and address[0] in {'127.0.0.1', '::1'}:
+        return _original_connect(sock, address)
+    return blocked()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--suite', choices=('base', 'framework'), default='base')
+    parser.add_argument('--suite', choices=('base', 'framework', 'mcp'), default='base')
     parser.add_argument('--tests-only', action='store_true')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     os.chdir(root)
     configure_dummy_environment()
-    with (patch.object(socket.socket, 'connect', blocked),
+    with (patch.object(socket.socket, 'connect', local_mcp_connect if args.suite == 'mcp' else blocked),
           patch.object(socket, 'create_connection', blocked),
           patch.object(socket, 'socketpair', local_socketpair)):
         suite = unittest.defaultTestLoader.discover(
-            'tests' if args.suite == 'base' else 'learning/frameworks',
+            {'base':'tests', 'framework':'learning/frameworks', 'mcp':'learning/mcp'}[args.suite],
             pattern='test_*.py', top_level_dir='.',
         )
+        if args.suite == 'base':
+            suite.addTests(unittest.defaultTestLoader.discover('learning/evaluation', pattern='test_*.py', top_level_dir='.'))
         result = unittest.TextTestRunner(verbosity=1).run(suite)
         if not result.wasSuccessful():
             raise SystemExit(1)
         if args.tests_only:
             return
-        demos = list(BASE_DEMOS if args.suite == 'base' else FRAMEWORK_DEMOS)
+        demos = list(BASE_DEMOS if args.suite == 'base' else FRAMEWORK_DEMOS) if args.suite != 'mcp' else [
+            'learning.mcp.step_21b_order_client', 'learning.mcp.step_21c_tool_adapter',
+            'learning.mcp.step_21d_error_layers', 'learning.mcp.step_21e_mcp_tool_loop',
+            'learning.mcp.step_21h_fastapi_lifespan',
+            'scripts.verify_mcp_http',
+        ]
         if args.suite == 'base':
             demos.extend('learning.context.' + p.stem for p in sorted((root / 'learning/context').glob('step_*.py')))
         for module in demos:
@@ -109,6 +124,19 @@ def main() -> None:
                 except SystemExit as error:
                     if error.code not in (None, 0, False):
                         raise
+        if args.suite == 'base':
+            for module, arguments in (
+                ('learning.web_basics.check_05_async_wait', []),
+                ('learning.web_basics.check_08_process_memory', []),
+                ('learning.pgvector.step_06_build_messages', ['--build']),
+                ('learning.pgvector.step_08_sources', ['--build']),
+                ('learning.pgvector.step_09_section_chunking', ['--split']),
+                ('learning.pgvector.step_09b_refresh_plan', ['--plan']),
+                ('learning.evaluation.step_02_run_first_case', ['--list-cases']),
+            ):
+                with patch.object(sys, 'argv', [module, *arguments]):
+                    runpy.run_module(module, run_name='__main__', alter_sys=True)
+                demos.append(module)
         print(f'OFFLINE_OK suite={args.suite} tests={result.testsRun} demos={len(demos)}')
 
 

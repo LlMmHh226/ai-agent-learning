@@ -2,6 +2,8 @@
 
 [返回首页](../README.md) · [代码阅读方法](code-reading.md)
 
+当前整合版可配置订单demo/PostgreSQL、知识ngram/pgvector。下方基础流程以入门默认模式说明，数据库路径见本页补充与 [安装顺序](database.md)。
+
 ## 正式多轮 Agent
 
 ```mermaid
@@ -39,9 +41,9 @@ flowchart LR
   F --> G[answer和Python构造的sources]
 ```
 
-入口：[RAG API](../app/api/rag.py)、[RAGService](../app/services/rag_service.py)。默认文档级 chunk、Top-1、最低分 0.3。三篇短 Markdown 是方便跟踪的示例，不是最佳切分参数建议。
+入口：[RAG API](../app/api/rag.py)、[RAGService](../app/services/rag_service.py)。ngram默认文档级chunk、Top-1、最低分0.3。pgvector默认Top-K3、最低相似度0.5，使用数据库中已保存的章节。三篇短Markdown用于跟踪，不是生产切分与阈值建议。
 
-知识工具 [search_knowledge_base](../app/tools/knowledge_tools.py)同样使用 n-gram，但返回 `found/results` 给外层 Agent，不在工具里生成最终答案。独立 RAG 的 `sources` 是结构化字段；Agent 的来源要求主要在答案正文中，两者不能混为一谈。
+知识工具 [search_knowledge_base](../app/tools/knowledge_tools.py)与RAG复用同一个 [检索入口](../app/rag/knowledge_retriever.py)，按配置选择ngram或pgvector，返回found/results给外层Agent。独立RAG的sources是结构化字段；Agent的来源要求主要在正文中。
 
 ## 20M：图版学习演示
 
@@ -63,4 +65,23 @@ flowchart LR
 
 ## 后续工程化方向
 
-当前是学习项目。数据库会话、向量库、部署、生产 Trace、身份与资源归属、真实订单系统均需独立设计和验证。扩展前先说明原有演示边界，不把新增框架依赖当作这些能力已实现。
+当前已实现可选订单数据库和pgvector检索。数据库会话、部署、生产Trace、身份与资源归属、真实电商平台仍需独立设计和验证。
+
+## PostgreSQL与pgvector路径
+
+```mermaid
+flowchart TD
+  A[问题进入正式API或知识工具] --> B[共享知识检索入口]
+  B --> C{配置后端}
+  C -->|ngram| D[本地Markdown字符检索]
+  C -->|pgvector| E[V4生成1536维问题向量]
+  E --> F[只读SQL 余弦距离升序Top-K]
+  F --> G[1-distance 转相似度 过滤阈值]
+  D --> H[Document与RetrievalResult]
+  G --> H
+  H --> I[已有Prompt与生成流程]
+```
+
+同步数据库与Embedding操作在工作线程运行；服务故障不会转换成“无相关资料”或静默换后端。提问时不生成document向量、不写知识表。知识更新是独立的预览、备份、编码、事务写新停旧和回读流程。
+
+订单路径由repository读取demo副本或PostgreSQL单行，工具继续返回found与原字段。MCP协议演示使用纯本地虚构订单函数，stdio服务无需继承Host聊天密钥；正式原生入口未自动迁移到MCP。

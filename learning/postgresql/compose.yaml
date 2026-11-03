@@ -1,0 +1,22 @@
+name: ai-agent-learning-db
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg17-trixie
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-25432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agent_learning}
+      POSTGRES_USER: ${POSTGRES_USER:-learner}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Fill POSTGRES_PASSWORD in root .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+      - ./exercises:/learning/exercises:ro
+      - ../pgvector:/learning/pgvector:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  pgdata:

@@ -1136,5 +1136,527 @@
     "command": "python -m learning.frameworks.step_20m_knowledge_tool",
     "network": false,
     "access": "本地运行（无外部模型请求）"
+  },
+  {
+    "id": "web_basics/01",
+    "title": "GET请求与路由",
+    "path": "learning/web_basics/step_01_hello.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [
+      "learning/web_basics/step_01_hello.py"
+    ],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/02",
+    "title": "查询参数",
+    "path": "learning/web_basics/step_02_query_parameter.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/03",
+    "title": "路径参数",
+    "path": "learning/web_basics/step_03_path_parameter.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/04",
+    "title": "请求与响应模型",
+    "path": "learning/web_basics/step_04_request_response_models.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/05",
+    "title": "异步与阻塞",
+    "path": "learning/web_basics/step_05_async_wait.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m learning.web_basics.check_05_async_wait",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/06",
+    "title": "Depends依赖注入",
+    "path": "learning/web_basics/step_06_depends.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/07",
+    "title": "应用生命周期",
+    "path": "learning/web_basics/step_07_lifespan.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/08",
+    "title": "进程内存",
+    "path": "learning/web_basics/step_08_process_memory.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m learning.web_basics.check_08_process_memory",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "web_basics/09",
+    "title": "HTTP错误与校验",
+    "path": "learning/web_basics/step_09_http_errors.md",
+    "code": "learning/web_basics/step_01_hello.py",
+    "scripts": [],
+    "command": "python -m uvicorn learning.web_basics.step_01_hello:app --reload --port 8001",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21a",
+    "title": "MCP中的角色",
+    "path": "learning/mcp/step_21a_mcp_roles.md",
+    "code": "learning/mcp/step_21b_order_server.py",
+    "scripts": [],
+    "command": "python -m learning.mcp.step_21b_order_client",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21b",
+    "title": "stdio订单服务",
+    "path": "learning/mcp/step_21b_local_order.md",
+    "code": "learning/mcp/step_21b_order_client.py",
+    "scripts": [
+      "learning/mcp/step_21b_order_client.py",
+      "learning/mcp/step_21b_order_server.py"
+    ],
+    "command": "python -m learning.mcp.step_21b_order_client",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21c",
+    "title": "模型格式适配",
+    "path": "learning/mcp/step_21c_tool_adapter.md",
+    "code": "learning/mcp/step_21c_tool_adapter.py",
+    "scripts": [
+      "learning/mcp/step_21c_tool_adapter.py"
+    ],
+    "command": "python -m learning.mcp.step_21c_tool_adapter",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21d",
+    "title": "MCP错误分层",
+    "path": "learning/mcp/step_21d_error_layers.md",
+    "code": "learning/mcp/step_21d_error_layers.py",
+    "scripts": [
+      "learning/mcp/step_21d_error_layers.py"
+    ],
+    "command": "python -m learning.mcp.step_21d_error_layers",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21e",
+    "title": "MCP工具循环",
+    "path": "learning/mcp/step_21e_mcp_tool_loop.md",
+    "code": "learning/mcp/step_21e_mcp_tool_loop.py",
+    "scripts": [
+      "learning/mcp/step_21e_mcp_tool_loop.py"
+    ],
+    "command": "python -m learning.mcp.step_21e_mcp_tool_loop",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21f",
+    "title": "真实模型与MCP",
+    "path": "learning/mcp/step_21f_real_model_mcp.md",
+    "code": "learning/mcp/step_21f_real_model_mcp.py",
+    "scripts": [
+      "learning/mcp/step_21f_real_model_mcp.py"
+    ],
+    "command": "python -m learning.mcp.step_21f_real_model_mcp",
+    "network": true,
+    "access": "真实外部模型请求，可能收费"
+  },
+  {
+    "id": "mcp/21g",
+    "title": "Streamable HTTP",
+    "path": "learning/mcp/step_21g_http_transport.md",
+    "code": "learning/mcp/step_21g_http_client.py",
+    "scripts": [
+      "learning/mcp/step_21g_http_client.py",
+      "learning/mcp/step_21g_http_server.py"
+    ],
+    "command": "python -m learning.mcp.step_21g_http_client",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "mcp/21h",
+    "title": "FastAPI复用MCP连接",
+    "path": "learning/mcp/step_21h_fastapi_lifespan.md",
+    "code": "learning/mcp/step_21h_fastapi_lifespan.py",
+    "scripts": [
+      "learning/mcp/step_21h_fastapi_lifespan.py"
+    ],
+    "command": "python -m learning.mcp.step_21h_fastapi_lifespan",
+    "network": false,
+    "access": "本地演示，不请求外部模型"
+  },
+  {
+    "id": "evaluation/01",
+    "title": "定义任务成功",
+    "path": "learning/evaluation/step_01_success_criteria.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/02",
+    "title": "采集正式入口",
+    "path": "learning/evaluation/step_02_first_real_run.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [
+      "learning/evaluation/step_02_run_first_case.py"
+    ],
+    "command": "python -m learning.evaluation.step_02_run_first_case --case-id order_tracking_10001 --show-case",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/03",
+    "title": "按案例ID执行",
+    "path": "learning/evaluation/step_03_choose_case.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/04",
+    "title": "缺少订单号",
+    "path": "learning/evaluation/step_04_no_order_id.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/05",
+    "title": "多轮案例",
+    "path": "learning/evaluation/step_05_multi_turn.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/06",
+    "title": "可选工具规则",
+    "path": "learning/evaluation/step_06_optional_tools.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/07",
+    "title": "明确刷新",
+    "path": "learning/evaluation/step_07_refresh_case.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/08",
+    "title": "政策事实",
+    "path": "learning/evaluation/step_08_after_sales_policy.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/09",
+    "title": "知识证据",
+    "path": "learning/evaluation/step_09_knowledge_evidence.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/10",
+    "title": "失败后的Prompt改进",
+    "path": "learning/evaluation/step_10_grounding_prompt.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "evaluation/11",
+    "title": "留出题与实体归属",
+    "path": "learning/evaluation/step_11_holdout_entity_evidence.md",
+    "code": "learning/evaluation/step_02_run_first_case.py",
+    "scripts": [],
+    "command": "python -m learning.evaluation.step_02_run_first_case --list-cases",
+    "network": false,
+    "access": "默认列表/预览不请求模型；显式--run会调用真实模型"
+  },
+  {
+    "id": "docker/01",
+    "title": "准备Docker",
+    "path": "learning/docker/step_01_install_start.md",
+    "code": "learning/postgresql/compose.yaml",
+    "scripts": [],
+    "command": "docker version",
+    "network": false,
+    "access": "首次下载镜像需要联网；不请求模型"
+  },
+  {
+    "id": "docker/02",
+    "title": "镜像与容器",
+    "path": "learning/docker/step_02_image_container.md",
+    "code": "learning/postgresql/compose.yaml",
+    "scripts": [],
+    "command": "docker run --rm --name learn-hello-1 hello-world",
+    "network": false,
+    "access": "首次下载镜像需要联网；不请求模型"
+  },
+  {
+    "id": "docker/03",
+    "title": "Compose数据库服务",
+    "path": "learning/docker/step_03_postgres_service.md",
+    "code": "learning/postgresql/compose.yaml",
+    "scripts": [],
+    "command": "docker compose --env-file .env -f learning/postgresql/compose.yaml up -d --wait",
+    "network": false,
+    "access": "首次下载镜像需要联网；不请求模型"
+  },
+  {
+    "id": "postgresql/01",
+    "title": "连接与SELECT",
+    "path": "learning/postgresql/step_01_select.md",
+    "code": "learning/postgresql/exercises/step_01_select.sql",
+    "scripts": [],
+    "command": "docker compose --env-file .env -f learning/postgresql/compose.yaml exec -T postgres psql -U learner -d agent_learning -f /learning/exercises/step_01_select.sql",
+    "network": false,
+    "access": "访问自己启动的教学数据库；不请求模型（正式聊天请求除外）"
+  },
+  {
+    "id": "postgresql/02",
+    "title": "按状态过滤",
+    "path": "learning/postgresql/step_02_filter_rows.md",
+    "code": "learning/postgresql/exercises/step_02_filter_rows.sql",
+    "scripts": [],
+    "command": "docker compose --env-file .env -f learning/postgresql/compose.yaml exec -T postgres psql -U learner -d agent_learning -f /learning/exercises/step_02_filter_rows.sql",
+    "network": false,
+    "access": "访问自己启动的教学数据库；不请求模型（正式聊天请求除外）"
+  },
+  {
+    "id": "postgresql/03",
+    "title": "Python参数化查询",
+    "path": "learning/postgresql/step_03_python_order_lookup.md",
+    "code": "learning/postgresql/step_03_python_order_lookup.py",
+    "scripts": [
+      "learning/postgresql/step_03_python_order_lookup.py"
+    ],
+    "command": "python -m learning.postgresql.step_03_python_order_lookup --order-id 10001",
+    "network": false,
+    "access": "访问自己启动的教学数据库；不请求模型（正式聊天请求除外）"
+  },
+  {
+    "id": "postgresql/04",
+    "title": "工具返回适配",
+    "path": "learning/postgresql/step_04_order_tool_result.md",
+    "code": "learning/postgresql/step_04_order_tool_result.py",
+    "scripts": [
+      "learning/postgresql/step_04_order_tool_result.py"
+    ],
+    "command": "python -m learning.postgresql.step_04_order_tool_result",
+    "network": false,
+    "access": "访问自己启动的教学数据库；不请求模型（正式聊天请求除外）"
+  },
+  {
+    "id": "postgresql/05",
+    "title": "正式接入订单",
+    "path": "learning/postgresql/step_05_wire_formal_tool.md",
+    "code": "app/repositories/order_repository.py",
+    "scripts": [],
+    "command": "python -m uvicorn main:app --reload",
+    "network": false,
+    "access": "访问自己启动的教学数据库；不请求模型（正式聊天请求除外）"
+  },
+  {
+    "id": "pgvector/01",
+    "title": "准备向量扩展",
+    "path": "learning/pgvector/step_01_prepare_pgvector.md",
+    "code": "learning/postgresql/compose.yaml",
+    "scripts": [],
+    "command": "docker compose --env-file .env -f learning/postgresql/compose.yaml ps",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/02",
+    "title": "建向量表",
+    "path": "learning/pgvector/step_02_enable_and_schema.md",
+    "code": "learning/pgvector/step_02_schema.sql",
+    "scripts": [],
+    "command": "docker compose --env-file .env -f learning/postgresql/compose.yaml exec -T postgres psql -U learner -d agent_learning -v ON_ERROR_STOP=1 -f /learning/pgvector/step_02_schema.sql",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/03",
+    "title": "单片段入库",
+    "path": "learning/pgvector/step_03_insert_one_chunk.md",
+    "code": "learning/pgvector/step_03_insert_one_chunk.py",
+    "scripts": [
+      "learning/pgvector/step_03_insert_one_chunk.py"
+    ],
+    "command": "python -m learning.pgvector.step_03_insert_one_chunk --preview",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/04",
+    "title": "批量入库",
+    "path": "learning/pgvector/step_04_batch_insert.md",
+    "code": "learning/pgvector/step_04_batch_insert.py",
+    "scripts": [
+      "learning/pgvector/step_04_batch_insert.py"
+    ],
+    "command": "python -m learning.pgvector.step_04_batch_insert --preview",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/05",
+    "title": "问题向量Top-K",
+    "path": "learning/pgvector/step_05_query_topk.md",
+    "code": "learning/pgvector/step_05_query_topk.py",
+    "scripts": [
+      "learning/pgvector/step_05_query_topk.py"
+    ],
+    "command": "python -m learning.pgvector.step_05_query_topk --preview",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/06",
+    "title": "结果转Prompt",
+    "path": "learning/pgvector/step_06_build_messages.md",
+    "code": "learning/pgvector/step_06_build_messages.py",
+    "scripts": [
+      "learning/pgvector/step_06_build_messages.py"
+    ],
+    "command": "python -m learning.pgvector.step_06_build_messages --build",
+    "network": false,
+    "access": "本地资料演示，无数据库和模型请求"
+  },
+  {
+    "id": "pgvector/07",
+    "title": "按资料生成",
+    "path": "learning/pgvector/step_07_generate_answer.md",
+    "code": "learning/pgvector/step_07_generate_answer.py",
+    "scripts": [
+      "learning/pgvector/step_07_generate_answer.py"
+    ],
+    "command": "python -m learning.pgvector.step_07_generate_answer",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/08",
+    "title": "程序生成sources",
+    "path": "learning/pgvector/step_08_sources.md",
+    "code": "learning/pgvector/step_08_sources.py",
+    "scripts": [
+      "learning/pgvector/step_08_sources.py"
+    ],
+    "command": "python -m learning.pgvector.step_08_sources --build",
+    "network": false,
+    "access": "本地资料演示，无数据库和模型请求"
+  },
+  {
+    "id": "pgvector/09",
+    "title": "按章节切分",
+    "path": "learning/pgvector/step_09_section_chunking.md",
+    "code": "learning/pgvector/step_09_section_chunking.py",
+    "scripts": [
+      "learning/pgvector/step_09_section_chunking.py"
+    ],
+    "command": "python -m learning.pgvector.step_09_section_chunking --split",
+    "network": false,
+    "access": "本地资料演示，无数据库和模型请求"
+  },
+  {
+    "id": "pgvector/09b",
+    "title": "更新计划",
+    "path": "learning/pgvector/step_09b_refresh_plan.md",
+    "code": "learning/pgvector/step_09b_refresh_plan.py",
+    "scripts": [
+      "learning/pgvector/step_09b_refresh_plan.py"
+    ],
+    "command": "python -m learning.pgvector.step_09b_refresh_plan --plan",
+    "network": false,
+    "access": "本地资料演示，无数据库和模型请求"
+  },
+  {
+    "id": "pgvector/09c",
+    "title": "事务更新向量",
+    "path": "learning/pgvector/step_09c_refresh_vectors.md",
+    "code": "learning/pgvector/step_09c_refresh_vectors.py",
+    "scripts": [
+      "learning/pgvector/step_09c_refresh_vectors.py"
+    ],
+    "command": "python -m learning.pgvector.step_09c_refresh_vectors --preview",
+    "network": false,
+    "access": "当前命令只读或预览；写入/生成选项见下文"
+  },
+  {
+    "id": "pgvector/10",
+    "title": "正式RAG接入",
+    "path": "learning/pgvector/step_10_formal_pgvector.md",
+    "code": "app/rag/knowledge_retriever.py",
+    "scripts": [],
+    "command": "python -m uvicorn main:app --reload",
+    "network": false,
+    "access": "启用pgvector后的有效问题访问数据库、真实Embedding和聊天模型"
   }
 ]

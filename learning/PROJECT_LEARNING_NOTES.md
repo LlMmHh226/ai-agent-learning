@@ -20,7 +20,7 @@ Schema 校验输入；API 将请求交给 Service 并包装响应；Service 编�
 
 离线准备或初始化：Markdown → Document(content, metadata) → chunk；请求时：query → retrieve → 空结果拒答，非空结果构建Prompt、调用模型、构造sources。
 
-正式检索使用字符n-gram，短知识文档默认按文档级chunk处理。阈值控制进入候选的最低分，Top-K限制返回数量；两者都不能判断资料是否具备所有必要事实。例：“换货运费由商家承担”不能推出“退货运费由商家承担”。
+入门默认使用字符n-gram，短知识文档默认按文档级chunk处理。阈值控制进入候选的最低分，Top-K限制返回数量；两者都不能判断资料是否具备所有必要事实。例：“换货运费由商家承担”不能推出“退货运费由商家承担”。
 
 Prompt分开系统规则、知识资料、用户问题、输出要求。资料是不可信数据，不得因文档包含“忽略规则”而升级为指令。Python从检索对象构造sources，仍需核对答案断言是否受证据支持。
 
@@ -30,7 +30,7 @@ Embedding把文本映射为固定长度浮点向量。知识用document模式，
 
 Dense Retriever使用文档向量缓存与余弦排序。缓存键应反映内容和模型配置，避免文件内容更新后误用旧向量。Hybrid使用RRF融合两个检索器的排名，避免直接相加不具可比性的原始分数。
 
-这些组件是独立实验，正式RAGService仍用n-gram。向量数据库不是Embedding的必要条件；本例少量向量可内存排序，规模、持久化、更新与过滤需求增长后再评估数据库。
+Dense/Hybrid仍是独立实验；当前正式RAGService与Agent知识工具另外共用可选pgvector后端。向量数据库不是Embedding的必要条件；本例少量向量可内存排序，规模、持久化、更新与过滤需求增长后再评估数据库。
 
 ## 评测与证据
 
@@ -43,3 +43,11 @@ Recall看相关资料找回多少，Precision看返回候选里相关项占多�
 LangChain把消息和工具包装为对象；`bind_tools`只提供工具说明，`create_agent`接管循环。LangGraph通过State、Node、Edge和条件边显式组织执行，Reducer规定字段更新规则，Checkpoint保存图状态。
 
 20M演示中，ConversationService继续负责历史与facts，适配函数把字典消息转成框架消息，图执行后再取正文返回。两个patch分别改变服务入口和模型生成；图和业务工具实际执行，模型选择与回答模拟。详细跟进路线见架构文档。
+
+## 新增能力（2026-11）
+
+订单存储可在demo/PostgreSQL间显式配置，进阶数据访问放在repository层；数据库失败与查无订单分开。同步工具与Embedding查询放入工作线程，避免阻塞HTTP事件循环。
+
+知识库可选pgvector：V4/1536文档向量持久化，问题生成同模型向量，在数据库中按余弦距离Top-K，再以1-distance过滤。按章节保留否定与商品归属；新旧向量更新先备份，同事务写新停旧，并核对内容指纹。见 [数据库说明](../docs/database.md)。
+
+MCP实验展示Host/Client/Server、stdio与HTTP、工具格式适配、错误分层和lifespan连接管理；正式原生接口未因此自动迁移为MCP。效果评测记录正式请求轨迹，机械结果与人工语义审核分开。九条案例不代表完整统一模型成绩，见 [评测流程](evaluation/EVALUATION_WORKFLOW.md)。

@@ -1,91 +1,167 @@
 aiohappyeyeballs==2.7.1
-    # via aiohttp
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   aiohttp
 aiohttp==3.14.5
-    # via dashscope
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   dashscope
 aiosignal==1.4.0
-    # via aiohttp
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   aiohttp
 annotated-doc==0.0.5
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   fastapi
     #   typer
 annotated-types==0.8.0
-    # via pydantic
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   pydantic
 anyio==4.15.1
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   httpx
     #   httpx2
     #   langsmith
     #   openai
     #   starlette
 attrs==26.1.0
-    # via aiohttp
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   aiohttp
 certifi==2026.7.22
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   dashscope
     #   httpcore
     #   httpx
     #   langchain-openai
     #   requests
 cffi==2.1.1 ; platform_python_implementation != 'PyPy'
-    # via cryptography
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   cryptography
 charset-normalizer==3.5.2
-    # via requests
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   requests
 click==8.5.0
-    # via uvicorn
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   uvicorn
 colorama==0.4.6 ; sys_platform == 'win32'
-    # via typer
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   typer
 cryptography==50.0.2
-    # via dashscope
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   dashscope
 dashscope==1.27.7
-    # via -r learning/frameworks/../../requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   -r learning/frameworks/../../requirements.in
 distro==1.9.0
-    # via langsmith
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langsmith
 fastapi==0.143.1
-    # via -r learning/frameworks/../../requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   -r learning/frameworks/../../requirements.in
 frozenlist==1.8.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   aiohttp
     #   aiosignal
 h11==0.16.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   httpcore
     #   httpcore2
     #   uvicorn
 httpcore==1.0.9
-    # via httpx
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   httpx
 httpcore2==2.13.1 ; sys_platform != 'emscripten'
-    # via httpx2
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   httpx2
 httpx==0.28.1
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   -r learning/frameworks/../../requirements.in
     #   dashscope
     #   langchain-core
     #   langgraph-sdk
 httpx-sse==0.4.3
-    # via dashscope
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   dashscope
 httpx2==2.13.1
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   langsmith
     #   openai
 httpx2-jsfetch==1.0 ; python_full_version >= '3.12' and sys_platform == 'emscripten'
-    # via httpx2
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   httpx2
 idna==3.20
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   anyio
     #   httpx
     #   httpx2
     #   requests
     #   yarl
 jiter==0.17.0
-    # via openai
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   openai
 jsonpatch==1.35
-    # via langchain-core
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langchain-core
 jsonpointer==3.2.1
-    # via jsonpatch
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   jsonpatch
 langchain==1.4.6
-    # via -r learning/frameworks/requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -r learning/frameworks/requirements.in
 langchain-core==1.6.10
     # via
+    #   -c learning/frameworks/requirements.txt
     #   -r learning/frameworks/requirements.in
     #   langchain
     #   langchain-openai
@@ -94,57 +170,100 @@ langchain-core==1.6.10
     #   langgraph-prebuilt
     #   langgraph-sdk
 langchain-openai==1.7.2
-    # via -r learning/frameworks/requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -r learning/frameworks/requirements.in
 langchain-protocol==0.0.19
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langchain-core
     #   langgraph-sdk
 langgraph==1.2.15
     # via
+    #   -c learning/frameworks/requirements.txt
     #   -r learning/frameworks/requirements.in
     #   langchain
 langgraph-checkpoint==4.3.0
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langgraph
     #   langgraph-prebuilt
 langgraph-prebuilt==1.1.1
-    # via langgraph
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langgraph
 langgraph-sdk==0.4.7
-    # via langgraph
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langgraph
 langsmith==0.14.8
-    # via langchain-core
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langchain-core
 markdown-it-py==4.2.0
-    # via rich
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   rich
 mdurl==0.1.2
-    # via markdown-it-py
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   markdown-it-py
 multidict==7.1.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   aiohttp
     #   yarl
 openai==3.31.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   -r learning/frameworks/../../requirements.in
     #   langchain-openai
 opentelemetry-api==1.45.1
-    # via fastapi
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   fastapi
 orjson==3.13.0
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langgraph-sdk
     #   langsmith
 ormsgpack==1.12.2
-    # via langgraph-checkpoint
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langgraph-checkpoint
 packaging==26.3
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langchain-core
     #   langsmith
 propcache==0.5.4
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   aiohttp
     #   yarl
+psycopg==3.3.7
+    # via
+    #   -c requirements.txt
+    #   -r learning/frameworks/../../requirements.in
+psycopg-binary==3.3.7 ; implementation_name != 'pypy'
+    # via
+    #   -c requirements.txt
+    #   psycopg
 pycparser==3.11 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
-    # via cffi
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   cffi
 pydantic==2.14.1
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   -r learning/frameworks/../../requirements.in
     #   fastapi
     #   langchain
@@ -154,51 +273,91 @@ pydantic==2.14.1
     #   openai
     #   pydantic-settings
 pydantic-core==2.50.1
-    # via pydantic
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   pydantic
 pydantic-settings==2.16.0
-    # via -r learning/frameworks/../../requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   -r learning/frameworks/../../requirements.in
 pygments==2.21.0
-    # via rich
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   rich
 python-dotenv==1.2.4
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   -r learning/frameworks/../../requirements.in
     #   pydantic-settings
 pyyaml==6.0.3
-    # via langchain-core
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langchain-core
 regex==2026.9.29
-    # via tiktoken
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   tiktoken
 requests==2.34.2
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   dashscope
     #   langsmith
     #   requests-toolbelt
     #   tiktoken
 requests-toolbelt==1.0.0
-    # via langsmith
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langsmith
 rich==15.0.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   dashscope
     #   typer
 shellingham==1.5.4
-    # via typer
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   typer
 sniffio==1.3.1
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   langsmith
     #   openai
 starlette==1.8.0
-    # via fastapi
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   fastapi
 tenacity==9.2.1
-    # via langchain-core
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langchain-core
 tiktoken==0.14.0
-    # via langchain-openai
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langchain-openai
 truststore==0.10.5 ; sys_platform != 'emscripten'
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   httpcore2
     #   httpx2
 typer==0.27.3
-    # via dashscope
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   dashscope
 typing-extensions==4.16.0
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   aiohttp
     #   aiosignal
     #   anyio
@@ -210,6 +369,7 @@ typing-extensions==4.16.0
     #   langsmith
     #   openai
     #   opentelemetry-api
+    #   psycopg
     #   pydantic
     #   pydantic-core
     #   pydantic-settings
@@ -217,28 +377,51 @@ typing-extensions==4.16.0
     #   typing-inspection
 typing-inspection==0.4.4
     # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
     #   fastapi
     #   pydantic
     #   pydantic-settings
+tzdata==2026.6 ; sys_platform == 'win32'
+    # via
+    #   -c requirements.txt
+    #   psycopg
 urllib3==2.8.0
-    # via requests
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   requests
 uuid-utils==0.17.1
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langchain-core
     #   langsmith
 uvicorn==0.54.0
-    # via -r learning/frameworks/../../requirements.in
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   -r learning/frameworks/../../requirements.in
 websocket-client==1.9.2
-    # via dashscope
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   dashscope
 websockets==16.1.1
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langgraph-sdk
     #   langsmith
 xxhash==4.0.1
     # via
+    #   -c learning/frameworks/requirements.txt
     #   langgraph
     #   langsmith
 yarl==1.25.1
-    # via aiohttp
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   -c requirements.txt
+    #   aiohttp
 zstandard==0.25.0
-    # via langsmith
+    # via
+    #   -c learning/frameworks/requirements.txt
+    #   langsmith

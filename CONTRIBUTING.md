@@ -17,6 +17,8 @@ python -m scripts.verify_offline --suite base
 python -m scripts.verify_offline --suite framework
 ```
 
+涉及MCP时，在独立MCP环境运行 `python -m scripts.verify_offline --suite mcp`。其中stdio和本机HTTP协议真实执行，模型不参与。Docker/数据库集成和真实付费调用需单独说明运行范围，不加入默认离线CI。
+
 默认验证不需要密钥。不要把真实调用加进CI，也不要将个人 `.env`、供应商返回的请求头或真实业务数据写入测试。
 
 ## 添加课程

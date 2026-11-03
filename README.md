@@ -9,9 +9,9 @@
 
 # 从零读懂 AI 客服 Agent
 
-一套中文、可运行、可逐步跟踪的 AI Agent / Python 后端教程。以同一个电商客服为例，从原生 Python 工具循环出发，学习 RAG、上下文工程，再对照 LangChain 和 LangGraph。
+一套中文、可运行、可逐步跟踪的 AI Agent / Python 后端教程。以同一个电商客服为例，从原生 Python 工具循环出发，学习 RAG、上下文工程，再对照 LangChain 和 LangGraph，并继续实践 MCP、效果评测、PostgreSQL 与 pgvector。
 
-**先跑通真实模型的一句话回答，再理解每一步发生了什么。** 本仓库包含 98 节分步讲义、对应代码、自测题和折叠参考答案。
+**先跑通真实模型的一句话回答，再理解每一步发生了什么。** 本仓库包含 146 节分步讲义、对应代码、自测题和折叠参考答案。
 
 ## 适合谁
 
@@ -84,6 +84,19 @@ python -m uvicorn main:app --reload
 | 4. 上下文工程 | 历史、事实、摘要实验、压缩、信任边界 | [18A～18M](learning/context/README.md) |
 | 5. LangChain / LangGraph | 工具对象、运行器、状态图、Checkpoint、HTTP 适配 | [19A～20M](learning/frameworks/README.md) |
 
+新增进阶内容（保留原步骤编号）：
+
+| 单元 | 主要成果 | 入口 |
+| --- | --- | --- |
+| Web基础补充 | 参数、异步、Depends、lifespan、进程与错误 | [9课](learning/web_basics/README.md) |
+| MCP | stdio/HTTP、工具格式适配、错误分层、模型循环 | [21A～21H](learning/mcp/README.md) |
+| 效果评测 | 正式HTTP轨迹、required/optional/none、证据与留出题 | [11课](learning/evaluation/README.md) |
+| Docker | 镜像、容器、端口、数据卷与Compose | [3课](learning/docker/README.md) |
+| PostgreSQL | Python参数化查询与正式订单工具 | [5课](learning/postgresql/README.md) |
+| pgvector | 入库、余弦检索、完整章节、事务更新与正式接入 | [12课](learning/pgvector/README.md) |
+
+入门默认无数据库：`ORDER_STORAGE_BACKEND=demo`、`KNOWLEDGE_RETRIEVAL_BACKEND=ngram`。进入数据库章节后按 [安装顺序](docs/database.md)创建独立教学库，再明确切换后端。不要把维护者本机已经启用的配置当作新读者的初始环境。
+
 [完整课程目录](learning/README.md) · [阶段复盘](docs/recap.md) · [调用链图](docs/architecture.md) · [面试速查](learning/INTERVIEW_QUICK_REFERENCE.md)
 
 每课先看前置知识和“访问范围”，再运行。检查题先独立回答，再展开答案。课程中的脚本是分步练习，`app` 是最终整合版；前几课不要求一次读懂全部 `app`。
@@ -92,9 +105,9 @@ python -m uvicorn main:app --reload
 
 | 部分 | 当前实现 | 不应误解为 |
 | --- | --- | --- |
-| 正式 Agent | 原生 SDK、订单/售后/知识库三工具，最多三次循环内模型调用 | 无限规划、生产订单操作 |
-| 正式 RAG | n-gram 检索、空结果固定拒答、Python 构造 sources | 已接入向量数据库、完全消除幻觉 |
-| 向量检索 | 独立 Embedding、Dense、Hybrid 和评测组件 | 正式问答入口已切换 Dense/Hybrid |
+| 正式 Agent | 原生三工具循环；订单默认demo，可切PostgreSQL | 真实电商接入、退款写操作 |
+| 正式 RAG | 默认n-gram；可配置pgvector，两个入口共用检索；返回sources | 所有读者已建库或已完成大规模质量校准 |
+| 向量检索 | V4/1536持久化、问题余弦Top-K；Dense/Hybrid独立实验 | 不同模型可混用向量、召回即证据充分 |
 | 会话 | 进程内历史、十轮窗口、订单号和有限退款偏好 | 数据库持久化、通用语义记忆、Token 预算控制 |
 | 上下文实验 | 人工摘要、字段压缩、消息结构与指标演示 | 自动摘要和生产监控已上线 |
 | LangGraph | 独立状态图与工具循环，20M 用模拟模型演示 HTTP 双工具 | 正式接口已迁移图服务、已实现审批界面 |
@@ -121,11 +134,13 @@ python -m scripts.verify_offline --suite base
 
 框架阶段使用单独环境，安装及验证命令见 [安装说明](docs/setup.md)。[验证记录](docs/validation.md)区分本机结果、真实服务结果与尚未运行的平台检查。
 
+新增MCP环境使用 `learning/mcp/requirements.txt`；可运行 `python -m scripts.verify_offline --suite mcp` 验证stdio与本机HTTP，不调用模型。效果评测默认只预览，显式 `--run` 才使用真实模型；数据库与Embedding写入不在默认CI中执行。
+
 ## 常见问题
 
 - **需要先装 LangChain 吗？** 不需要；进入第五阶段再创建框架环境。
 - **为什么运行脚本要用 `-m`？** 从仓库根目录运行模块，保证 `app` 和 `learning` 的导入路径一致。
 - **如何看不到模型请求也能验证链路？** 测试替换模型响应，但仍执行本地路由、工具与状态处理；这只能证明对应程序逻辑。
-- **如何继续完善项目？** 先复盘已学内容，再按需求扩展持久化、部署和真实评测；这些属于后续方向，不计入本课程已有实现。
+- **如何继续完善项目？** 先学习新增的MCP、评测和数据库章节，再按需求扩展会话持久化与部署。订单和向量已可持久化，会话仍在进程内。
 
 欢迎按 [贡献指南](CONTRIBUTING.md)提交修正。代码和教程采用 [MIT 许可](LICENSE)。发布自己的副本前，请看 [GitHub 上传说明](docs/publishing.md)。

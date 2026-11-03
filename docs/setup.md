@@ -4,9 +4,11 @@
 
 ## 环境约定
 
-首版验证基线为 Python 3.11；所有课程从仓库根目录运行，使用 `python -m 模块名`。基础与框架使用两个独立虚拟环境，不使用 `--system-site-packages`。
+验证基线为 Python 3.11；所有课程从仓库根目录运行，使用 `python -m 模块名`。基础、框架和MCP使用三个独立虚拟环境，不使用 `--system-site-packages`。
 
 基础环境按首页安装。`requirements.in` 记录直接依赖范围，`requirements.txt` 是解析后的完整固定版本清单。框架清单包含完整应用依赖，不能假设另一个环境中的包会自动可用。普通读者安装 `.txt` 即可。
+
+入门默认 `ORDER_STORAGE_BACKEND=demo`、`KNOWLEDGE_RETRIEVAL_BACKEND=ngram`，不需要Docker或数据库。PostgreSQL和pgvector是后续的显式配置模式，完整安装顺序见 [数据库说明](database.md)。不要复制维护者本机.env。
 
 ## 真实模型配置
 
@@ -48,6 +50,28 @@ python -m scripts.verify_offline --suite framework
 
 `deactivate` 仅在已经激活虚拟环境时使用。框架测试模拟模型；课程 19B、19C、19E、19F 和 20I 的直接运行入口访问真实模型，19D、20A～20H、20J～20M 是本地演示，先阅读各课标注。
 
+## MCP环境
+
+Windows PowerShell：
+
+```powershell
+py -3.11 -m venv .venv-mcp
+.\.venv-mcp\Scripts\Activate.ps1
+python -m pip install -r learning/mcp/requirements.txt
+python -m scripts.verify_offline --suite mcp
+```
+
+macOS/Linux：
+
+```bash
+python3.11 -m venv .venv-mcp
+source .venv-mcp/bin/activate
+python -m pip install -r learning/mcp/requirements.txt
+python -m scripts.verify_offline --suite mcp
+```
+
+先退出已激活的其他环境。MCP清单含完整依赖，固定MCP 2.3 API；默认检查只连接本机stdio/HTTP，不调用模型。21F才使用配置的真实模型。HTTP演示仅监听127.0.0.1，独立HTTP服务用Ctrl+C结束。
+
 ## Embedding 配置
 
 进入 RAG 16B 时才在 `.env` 增加：
@@ -61,6 +85,8 @@ EMBEDDING_DIMENSIONS=1536
 
 本项目实际使用 DashScope SDK，而不是 LlamaIndex。聊天 Key 与百炼 Key 可以属于不同服务。模型权限、额度、价格由供应商决定；教程不保证免费额度。`1536` 用于检查 v2 返回向量长度，不是截取前 1536 维或改变模型结构。
 
+进入pgvector章节时改为 `text-embedding-v4`，仍显式请求1536维。SDK对V3/V4传dimension，对V2只校验长度。不同模型的文档向量和问题向量必须分开，不能因为维度相同就混在同一检索表。
+
 知识库和测试问题会在真实向量实验中发送给服务商。当前是虚构样例；替换为自己的资料后应确认资料可以外发。不要一口气执行全部真实评测脚本。
 
 ## 离线验证
@@ -70,7 +96,7 @@ python -m scripts.verify_offline --suite base
 python -m scripts.check_docs
 ```
 
-离线入口覆盖 `.env` 中的配置为假值，关闭追踪上传并阻止外部 socket 连接。Windows asyncio 内部使用的本机 socketpair 是事件循环机制，不是模型请求。不要用递归发现所有 `learning` 文件的方式替代这个白名单入口，否则可能运行真实模型实验。
+离线入口覆盖 `.env` 中的配置为假值，关闭追踪上传并阻止外部 socket 连接。Windows asyncio 内部使用的本机 socketpair 是事件循环机制。MCP组额外允许本机回环连接以测试HTTP协议；不连接外部模型。不要用递归发现所有 `learning` 文件的方式替代这个白名单入口，否则可能运行真实模型实验。
 
 ## 常见故障
 

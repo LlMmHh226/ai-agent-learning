@@ -1,23 +1,31 @@
 """检查公开源码、课程覆盖、相对链接与运行模块；只报告问题位置，不回显敏感值。"""
 import ast
 import json
+import os
 from pathlib import Path
 import re
+import subprocess
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDED = {'.git', '.venv', '.venv-langchain', '__pycache__', '.pytest_cache'}
+EXCLUDED = {'.git', '__pycache__', '.pytest_cache', 'results', 'backups'}
 
 
 def public_files():
-    for path in ROOT.rglob('*'):
-        if path.is_file() and not EXCLUDED.intersection(path.relative_to(ROOT).parts):
-            yield path
+    for directory, folders, filenames in os.walk(ROOT):
+        folders[:] = [name for name in folders if name not in EXCLUDED and not name.startswith('.venv')]
+        for name in filenames:
+            yield Path(directory) / name
 
 
 def main() -> None:
     errors = []
     links = 0
+    try:
+        tracked = set(subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True,
+                                    text=True, encoding='utf-8', check=False).stdout.splitlines())
+    except FileNotFoundError:
+        tracked = set()
     lessons = json.loads((ROOT / 'docs/lessons.json').read_text(encoding='utf-8'))
     covered = set()
     headings = ('## 学习目标', '## 前置知识', '## 文件职责', '## 具体输入与执行过程',
@@ -46,9 +54,10 @@ def main() -> None:
     for path in public_files():
         relative = path.relative_to(ROOT).as_posix()
         if path.name == '.env' or path.name.startswith('.env.') and path.name != '.env.example':
-            errors.append(f'{relative}: private configuration file')
+            if relative in tracked:
+                errors.append(f'{relative}: private configuration file is tracked by Git')
             continue
-        if path.suffix not in {'.md', '.py', '.json', '.yml', '.txt', '.in', '.http'}:
+        if path.suffix not in {'.md', '.py', '.json', '.yml', '.yaml', '.sql', '.txt', '.in', '.http', '.ps1'}:
             continue
         text = path.read_text(encoding='utf-8-sig')
         if path.suffix == '.py':
@@ -73,7 +82,7 @@ def main() -> None:
             resolved = (path.parent / target).resolve()
             links += 1
             if not resolved.is_relative_to(ROOT) or not resolved.exists():
-                errors.append(f'{relative}: broken or external local link')
+                errors.append(f'{relative}: link target missing or outside repository: {target}')
         for match in re.finditer(r'python(?: -X utf8)? -m ([a-zA-Z_]\w*(?:\.\w+)*)', text):
             module = match[1]
             if module.split('.')[0] in {'learning','scripts','app'}:

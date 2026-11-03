@@ -61,6 +61,36 @@ class EmbeddingServiceTests(unittest.TestCase):
             call_mock.call_args_list[0].kwargs["request_timeout"],
             20,
         )
+        for call in call_mock.call_args_list:
+            self.assertNotIn("dimension", call.kwargs)
+
+    @patch("app.services.embedding_service.TextEmbedding.call")
+    def test_v4_preserves_dimensions_for_documents_and_queries(self, call_mock) -> None:
+        self.service.model = "text-embedding-v4"
+        self.service.dimensions = 1536
+
+        def response_for_requested_dimension(**kwargs):
+            # 模拟V4：未指定dimension时默认返回1024维。
+            dimension = kwargs.get("dimension", 1024)
+            return SimpleNamespace(
+                status_code=200,
+                output={
+                    "embeddings": [
+                        {"text_index": 0, "embedding": [0.1] * dimension},
+                    ]
+                },
+            )
+
+        call_mock.side_effect = response_for_requested_dimension
+
+        documents = self.service.embed_documents(["知识片段"])
+        query = self.service.embed_query("用户问题")
+
+        self.assertEqual(len(documents[0]), 1536)
+        self.assertEqual(len(query), 1536)
+        for call in call_mock.call_args_list:
+            self.assertEqual(call.kwargs["dimension"], 1536)
+            self.assertEqual(call.kwargs["model"], "text-embedding-v4")
 
     @patch("app.services.embedding_service.TextEmbedding.call")
     def test_does_not_retry_failed_request(self, call_mock) -> None:

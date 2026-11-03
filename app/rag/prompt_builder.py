@@ -42,7 +42,7 @@ def build_rag_messages(
 
     参数:
         query:
-            用户输入的问题。RAGService 从聊天请求中取得该值，
+            用户输入的问题。后续 RAGService 会从聊天请求中取得该值，
             当前学习脚本直接提供一个示例问题。
 
         retrieval_results:
