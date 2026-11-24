@@ -1658,5 +1658,145 @@
     "command": "python -m uvicorn main:app --reload",
     "network": false,
     "access": "启用pgvector后的有效问题访问数据库、真实Embedding和聊天模型"
+  },
+  {
+    "id": "postgresql/06",
+    "title": "会话持久化与版本冲突",
+    "path": "learning/postgresql/step_06_conversation_persistence.md",
+    "code": "learning/postgresql/step_06_conversation_persistence.py",
+    "scripts": ["learning/postgresql/step_06_conversation_persistence.py"],
+    "command": "python -m learning.postgresql.step_06_conversation_persistence",
+    "network": false,
+    "access": "默认预览；显式读写仅使用本机教学数据库，不请求模型"
+  },
+  {
+    "id": "runtime/01",
+    "title": "请求 ID 与分段日志",
+    "path": "learning/runtime/step_01_request_tracing.md",
+    "code": "learning/runtime/step_01_request_tracing.py",
+    "scripts": ["learning/runtime/step_01_request_tracing.py"],
+    "command": "python -m learning.runtime.step_01_request_tracing",
+    "network": false,
+    "access": "进程内 HTTP，虚构订单，无外部模型"
+  },
+  {
+    "id": "runtime/02",
+    "title": "请求总预算",
+    "path": "learning/runtime/step_02_request_timeout.md",
+    "code": "learning/runtime/step_02_request_timeout.py",
+    "scripts": ["learning/runtime/step_02_request_timeout.py"],
+    "command": "python -m learning.runtime.step_02_request_timeout",
+    "network": false,
+    "access": "进程内 HTTP，模拟两段异步工作"
+  },
+  {
+    "id": "runtime/03",
+    "title": "模型调用的有限重试",
+    "path": "learning/runtime/step_03_model_retry.md",
+    "code": "learning/runtime/step_03_model_retry.py",
+    "scripts": ["learning/runtime/step_03_model_retry.py"],
+    "command": "python -m learning.runtime.step_03_model_retry",
+    "network": false,
+    "access": "固定 HTTP 错误示例；无外部模型"
+  },
+  {
+    "id": "runtime/04",
+    "title": "启动检查与演示模式",
+    "path": "learning/runtime/step_04_start_and_demo.md",
+    "code": "learning/runtime/step_01_request_tracing.py",
+    "scripts": [],
+    "command": "python -m learning.runtime.step_01_request_tracing",
+    "network": false,
+    "access": "默认进程内检查，可选本机回环服务"
+  },
+  {
+    "id": "mcp/22a",
+    "title": "工具执行边界",
+    "path": "learning/mcp/step_22a_formal_boundary.md",
+    "code": "learning/mcp/step_22a_formal_boundary.py",
+    "scripts": ["learning/mcp/step_22a_formal_boundary.py"],
+    "command": "python -m learning.mcp.step_22a_formal_boundary",
+    "network": false,
+    "access": "本地参数校验和网关模拟"
+  },
+  {
+    "id": "mcp/22b",
+    "title": "订单网关生命周期",
+    "path": "learning/mcp/step_22b_order_lifecycle.md",
+    "code": "learning/mcp/step_22b_order_lifecycle.py",
+    "scripts": ["learning/mcp/step_22b_order_lifecycle.py"],
+    "command": "python -m learning.mcp.step_22b_order_lifecycle",
+    "network": false,
+    "access": "进程内 HTTP 和真实本机 stdio，不访问模型"
+  },
+  {
+    "id": "mcp/22c",
+    "title": "发现工具与限定开放范围",
+    "path": "learning/mcp/step_22c_tool_discovery.md",
+    "code": "learning/mcp/step_22c_tool_discovery.py",
+    "scripts": ["learning/mcp/step_22c_tool_discovery.py"],
+    "command": "python -m learning.mcp.step_22c_tool_discovery",
+    "network": false,
+    "access": "本机 stdio，固定样例 Tool Call"
+  },
+  {
+    "id": "mcp/22d",
+    "title": "SKU 与零库存",
+    "path": "learning/mcp/step_22d_sku_lookup.md",
+    "code": "learning/mcp/step_22d_sku_lookup.py",
+    "scripts": ["learning/mcp/step_22d_sku_lookup.py"],
+    "command": "python -m learning.mcp.step_22d_sku_lookup",
+    "network": false,
+    "access": "纯本地样例数据，无 MCP 或模型请求"
+  },
+  {
+    "id": "multi_agent/23a",
+    "title": "角色分工与任务交接",
+    "path": "learning/multi_agent/step_23a_roles_and_handoff.md",
+    "code": "learning/multi_agent/step_23b_order_agent.py",
+    "scripts": [],
+    "command": "python -m learning.multi_agent.step_23b_order_agent --task \"核实订单10001的物流单号\"",
+    "network": false,
+    "access": "预览任务消息，不执行工具或模型"
+  },
+  {
+    "id": "multi_agent/23b",
+    "title": "订单角色与工具范围",
+    "path": "learning/multi_agent/step_23b_order_agent.md",
+    "code": "learning/multi_agent/step_23b_order_agent.py",
+    "scripts": ["learning/multi_agent/step_23b_order_agent.py"],
+    "command": "python -m learning.multi_agent.step_23b_order_agent",
+    "network": false,
+    "access": "预览角色消息与工具范围"
+  },
+  {
+    "id": "multi_agent/23c",
+    "title": "用 LangGraph 状态交接",
+    "path": "learning/multi_agent/step_23c_two_agents.md",
+    "code": "learning/multi_agent/step_23c_two_agents.py",
+    "scripts": ["learning/multi_agent/step_23c_two_agents.py"],
+    "command": "python -m learning.multi_agent.step_23c_two_agents",
+    "network": false,
+    "access": "实际运行 LangGraph 和本地工具；模型回复固定"
+  },
+  {
+    "id": "multi_agent/23d",
+    "title": "一次路由与参数校验",
+    "path": "learning/multi_agent/step_23d_router.md",
+    "code": "learning/multi_agent/step_23d_router.py",
+    "scripts": ["learning/multi_agent/step_23d_router.py"],
+    "command": "python -m learning.multi_agent.step_23d_router",
+    "network": false,
+    "access": "固定路由候选，不调用工具或模型"
+  },
+  {
+    "id": "multi_agent/23d-extension",
+    "title": "受控主管与跨轮待办",
+    "path": "learning/multi_agent/step_23d_supervisor_demo.md",
+    "code": "learning/multi_agent/step_23d_supervisor_demo.py",
+    "scripts": ["learning/multi_agent/step_23d_supervisor_demo.py"],
+    "command": "python -m learning.multi_agent.step_23d_supervisor_demo",
+    "network": false,
+    "access": "本机只读样例，内存续接，不调用模型或数据库"
   }
 ]

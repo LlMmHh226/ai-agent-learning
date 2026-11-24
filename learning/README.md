@@ -155,6 +155,10 @@
 - [真实模型与MCP](mcp/step_21f_real_model_mcp.md)
 - [Streamable HTTP](mcp/step_21g_http_transport.md)
 - [FastAPI复用MCP连接](mcp/step_21h_fastapi_lifespan.md)
+- [22A 工具执行边界](mcp/step_22a_formal_boundary.md)
+- [22B 订单网关生命周期](mcp/step_22b_order_lifecycle.md)
+- [22C 工具发现与范围](mcp/step_22c_tool_discovery.md)
+- [22D SKU 与库存](mcp/step_22d_sku_lookup.md)
 
 ### 正式入口效果评测
 
@@ -180,7 +184,7 @@
 - [镜像与容器](docker/step_02_image_container.md)
 - [Compose数据库服务](docker/step_03_postgres_service.md)
 
-### PostgreSQL订单持久化
+### PostgreSQL 订单数据与会话持久化
 
 SQL熟练的读者可快速阅读前两课，从Python参数化查询开始。演示与正式代码共享根.env，数据库为独立教学库。
 
@@ -189,6 +193,7 @@ SQL熟练的读者可快速阅读前两课，从Python参数化查询开始。�
 - [Python参数化查询](postgresql/step_03_python_order_lookup.md)
 - [工具返回适配](postgresql/step_04_order_tool_result.md)
 - [正式接入订单](postgresql/step_05_wire_formal_tool.md)
+- [会话持久化与版本冲突](postgresql/step_06_conversation_persistence.md) — 默认离线预览；显式模式只操作本机教学表
 
 ### pgvector语义检索与正式接入
 
@@ -206,4 +211,23 @@ SQL熟练的读者可快速阅读前两课，从Python参数化查询开始。�
 - [更新计划](pgvector/step_09b_refresh_plan.md)
 - [事务更新向量](pgvector/step_09c_refresh_vectors.md)
 - [正式RAG接入](pgvector/step_10_formal_pgvector.md)
+
+### 请求运行保障
+
+看 [运行保障首页](runtime/README.md)。以下课程使用基础环境和教学应用，默认不请求真实服务。
+
+- [01 请求追踪](runtime/step_01_request_tracing.md)
+- [02 请求时间预算](runtime/step_02_request_timeout.md)
+- [03 模型调用有限重试](runtime/step_03_model_retry.md)
+- [04 启动检查与演示模式](runtime/step_04_start_and_demo.md)
+
+### 多 Agent 协作
+
+看 [多 Agent 首页](multi_agent/README.md)。先理解订单到售后的数据交接，再看入口路由和每步决策；使用框架环境，全部为离线教学实验。
+
+- [23A 角色分工与任务交接](multi_agent/step_23a_roles_and_handoff.md)
+- [23B 订单角色与工具范围](multi_agent/step_23b_order_agent.md)
+- [23C LangGraph 状态交接](multi_agent/step_23c_two_agents.md)
+- [23D 一次路由](multi_agent/step_23d_router.md)
+- [23D 延伸：受控主管与跨轮待办](multi_agent/step_23d_supervisor_demo.md)
 

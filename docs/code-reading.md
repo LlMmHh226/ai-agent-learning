@@ -52,6 +52,8 @@ c1 是会话键，current_order_id 是字段名，10001 是值。模型不会自
 
 在 [正式会话服务](../app/services/conversation_service.py)中标出“读 facts”“请求模型”“写 facts”“保存 assistant”“裁剪”五个位置，然后不用看代码复述顺序。
 
+进阶练习：沿着 [23C](../learning/multi_agent/step_23c_two_agents.md) 找到外层状态、订单角色的消息和售后的工具结果。用 `99999` 观察哪条边终止了流程，再读 [主管示例](../learning/multi_agent/step_23d_supervisor_demo.md) 中 `ready_actions()` 如何根据已核实的事实限制下一步。
+
 <details>
 <summary>参考顺序</summary>
 

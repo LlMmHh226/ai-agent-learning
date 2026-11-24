@@ -94,6 +94,10 @@ PGVECTOR_MIN_SCORE=0.5
 
 0.5是教学默认，尚未有广泛校准。阈值放行不等于证据充分；无答案问题可能召回相关产品背景并返回sources，仍需审核回答是否明确无法确认。
 
+## 会话快照的独立实验
+
+[会话持久化与版本冲突](../learning/postgresql/step_06_conversation_persistence.md) 沿用本机 Compose 教学库，新增单独的 `lesson_conversations` 表。默认命令不连接数据库；实跑可以对指定教学 ID 写入、另起进程读出并验证版本冲突。正式 HTTP 应用的会话仍保存在进程内。
+
 ## 停止与保留数据
 
 ```console

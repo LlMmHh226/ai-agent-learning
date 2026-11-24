@@ -14,3 +14,7 @@
 - [21F 真实模型与MCP](step_21f_real_model_mcp.md) — 真实外部模型请求，可能收费
 - [21G Streamable HTTP](step_21g_http_transport.md) — 本地演示，不请求外部模型
 - [21H FastAPI复用MCP连接](step_21h_fastapi_lifespan.md) — 本地演示，不请求外部模型
+- [22A 工具执行边界](step_22a_formal_boundary.md) — 本地参数校验与网关演示
+- [22B 订单网关生命周期](step_22b_order_lifecycle.md) — 真实本机 stdio，样例订单
+- [22C 发现工具与限定开放范围](step_22c_tool_discovery.md) — 真实本机 stdio，使用手写 Tool Call
+- [22D SKU与库存](step_22d_sku_lookup.md) — 独立本地函数练习，未加入工具服务端

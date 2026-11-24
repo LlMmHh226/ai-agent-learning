@@ -9,9 +9,9 @@
 
 # 从零读懂 AI 客服 Agent
 
-一套中文、可运行、可逐步跟踪的 AI Agent / Python 后端教程。以同一个电商客服为例，从原生 Python 工具循环出发，学习 RAG、上下文工程，再对照 LangChain 和 LangGraph，并继续实践 MCP、效果评测、PostgreSQL 与 pgvector。
+一套中文、可运行、可逐步跟踪的 AI Agent / Python 后端教程。以电商客服为例，从原生工具循环、RAG 和上下文工程出发，对照 LangChain 与 LangGraph，再实践 MCP、效果评测、PostgreSQL 与 pgvector、请求运行保障和多 Agent 协作。
 
-**先跑通真实模型的一句话回答，再理解每一步发生了什么。** 本仓库包含 146 节分步讲义、对应代码、自测题和折叠参考答案。
+**先跑通真实模型的一句话回答，再理解每一步发生了什么。** 本仓库包含 160 节分步讲义、对应代码、自测题和折叠参考答案。
 
 ## 适合谁
 
@@ -89,11 +89,13 @@ python -m uvicorn main:app --reload
 | 单元 | 主要成果 | 入口 |
 | --- | --- | --- |
 | Web基础补充 | 参数、异步、Depends、lifespan、进程与错误 | [9课](learning/web_basics/README.md) |
-| MCP | stdio/HTTP、工具格式适配、错误分层、模型循环 | [21A～21H](learning/mcp/README.md) |
+| MCP | stdio/HTTP、格式适配、连接复用、工具发现与范围控制 | [21A～22D](learning/mcp/README.md) |
 | 效果评测 | 正式HTTP轨迹、required/optional/none、证据与留出题 | [11课](learning/evaluation/README.md) |
 | Docker | 镜像、容器、端口、数据卷与Compose | [3课](learning/docker/README.md) |
-| PostgreSQL | Python参数化查询与正式订单工具 | [5课](learning/postgresql/README.md) |
+| PostgreSQL | 参数化查询、订单工具、会话快照与版本冲突 | [6课](learning/postgresql/README.md) |
 | pgvector | 入库、余弦检索、完整章节、事务更新与正式接入 | [12课](learning/pgvector/README.md) |
+| 运行保障 | 请求 ID、全链路时间预算、有限重试和健康检查 | [4课](learning/runtime/README.md) |
+| 多 Agent | 订单与售后角色、LangGraph 状态、路由校验与跨轮待办 | [23A～23D 与延伸](learning/multi_agent/README.md) |
 
 入门默认无数据库：`ORDER_STORAGE_BACKEND=demo`、`KNOWLEDGE_RETRIEVAL_BACKEND=ngram`。进入数据库章节后按 [安装顺序](docs/database.md)创建独立教学库，再明确切换后端。不要把维护者本机已经启用的配置当作新读者的初始环境。
 
@@ -108,9 +110,10 @@ python -m uvicorn main:app --reload
 | 正式 Agent | 原生三工具循环；订单默认demo，可切PostgreSQL | 真实电商接入、退款写操作 |
 | 正式 RAG | 默认n-gram；可配置pgvector，两个入口共用检索；返回sources | 所有读者已建库或已完成大规模质量校准 |
 | 向量检索 | V4/1536持久化、问题余弦Top-K；Dense/Hybrid独立实验 | 不同模型可混用向量、召回即证据充分 |
-| 会话 | 进程内历史、十轮窗口、订单号和有限退款偏好 | 数据库持久化、通用语义记忆、Token 预算控制 |
+| 正式会话 | 进程内历史、十轮窗口、订单号和有限退款偏好；另有独立的 PostgreSQL 存储实验 | 正式会话已切换为数据库、自动摘要、Token 预算控制 |
 | 上下文实验 | 人工摘要、字段压缩、消息结构与指标演示 | 自动摘要和生产监控已上线 |
 | LangGraph | 独立状态图与工具循环，20M 用模拟模型演示 HTTP 双工具 | 正式接口已迁移图服务、已实现审批界面 |
+| 多 Agent | 独立课堂练习；模拟模型驱动本地角色与只读工具 | 正式路由已迁移、多订单自动处理、真实退款或模型效果评测 |
 
 流式入口演示文本输出，不代表实现了流式工具循环。订单偏好只保存数据，不执行退款。相关文档检索到不代表答案存在；引用来源也不自动证明每个断言正确。
 
@@ -141,6 +144,6 @@ python -m scripts.verify_offline --suite base
 - **需要先装 LangChain 吗？** 不需要；进入第五阶段再创建框架环境。
 - **为什么运行脚本要用 `-m`？** 从仓库根目录运行模块，保证 `app` 和 `learning` 的导入路径一致。
 - **如何看不到模型请求也能验证链路？** 测试替换模型响应，但仍执行本地路由、工具与状态处理；这只能证明对应程序逻辑。
-- **如何继续完善项目？** 先学习新增的MCP、评测和数据库章节，再按需求扩展会话持久化与部署。订单和向量已可持久化，会话仍在进程内。
+- **想练重启恢复与多 Agent，该从哪开始？** 先跟 [会话持久化](learning/postgresql/step_06_conversation_persistence.md) 验证独立教学表，再跟 [多 Agent](learning/multi_agent/README.md) 观察任务与证据交接。正式聊天入口仍使用进程内会话。
 
 欢迎按 [贡献指南](CONTRIBUTING.md)提交修正。代码和教程采用 [MIT 许可](LICENSE)。发布自己的副本前，请看 [GitHub 上传说明](docs/publishing.md)。

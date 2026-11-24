@@ -51,6 +51,10 @@ BASE_DEMOS = [
     'learning.rag.step_17c_02_holdout_eval',
     'learning.rag.step_17e_evidence_audit',
     'learning.rag.step_17g_rag_branch_recap',
+    'learning.postgresql.step_06_conversation_persistence',
+    'learning.runtime.step_01_request_tracing',
+    'learning.runtime.step_02_request_timeout',
+    'learning.runtime.step_03_model_retry',
 ]
 FRAMEWORK_DEMOS = [
     'learning.frameworks.step_19d_langchain_tool_object',
@@ -60,6 +64,10 @@ FRAMEWORK_DEMOS = [
         'step_20g_node_failure', 'step_20h_message_reducer', 'step_20j_native_graph_comparison',
         'step_20k_graph_conversation', 'step_20l_http_graph_demo', 'step_20m_knowledge_tool',
     )],
+    'learning.multi_agent.step_23b_order_agent',
+    'learning.multi_agent.step_23c_two_agents',
+    'learning.multi_agent.step_23d_router',
+    'learning.multi_agent.step_23d_supervisor_demo',
 ]
 
 
@@ -113,6 +121,8 @@ def main() -> None:
             'learning.mcp.step_21d_error_layers', 'learning.mcp.step_21e_mcp_tool_loop',
             'learning.mcp.step_21h_fastapi_lifespan',
             'scripts.verify_mcp_http',
+            'learning.mcp.step_22a_formal_boundary', 'learning.mcp.step_22b_order_lifecycle',
+            'learning.mcp.step_22c_tool_discovery', 'learning.mcp.step_22d_sku_lookup',
         ]
         if args.suite == 'base':
             demos.extend('learning.context.' + p.stem for p in sorted((root / 'learning/context').glob('step_*.py')))

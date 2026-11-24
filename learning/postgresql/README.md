@@ -1,4 +1,4 @@
-# PostgreSQL订单持久化
+# PostgreSQL：订单数据与会话持久化
 
 [课程总目录](../README.md)
 
@@ -9,3 +9,4 @@ SQL熟练的读者可快速阅读前两课，从Python参数化查询开始。�
 - [03 Python参数化查询](step_03_python_order_lookup.md) — 访问自己启动的教学数据库；不请求模型（正式聊天请求除外）
 - [04 工具返回适配](step_04_order_tool_result.md) — 访问自己启动的教学数据库；不请求模型（正式聊天请求除外）
 - [05 正式接入订单](step_05_wire_formal_tool.md) — 访问自己启动的教学数据库；不请求模型（正式聊天请求除外）
+- [06 会话持久化与版本冲突](step_06_conversation_persistence.md) — 默认离线；显式连接本机教学表，不使用模型

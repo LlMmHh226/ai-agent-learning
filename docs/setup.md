@@ -111,6 +111,6 @@ python -m scripts.check_docs
 | 连接超时 | 网络、代理和服务地址；不要为修复连接而改工具逻辑 |
 | 普通聊天成功，工具课失败 | 该模型是否支持工具调用，返回的工具名称与参数是否符合协议 |
 | 中文乱码 | 使用 UTF-8 终端，必要时 `python -X utf8 -m ...` |
-| 重启后会话消失 | 当前会话和内存 Checkpoint 都是进程内数据，这是实现边界 |
+| 重启后会话消失 | 正式会话和内存 Checkpoint 都是进程内数据；[持久化课](../learning/postgresql/step_06_conversation_persistence.md) 使用独立教学表 |
 
 报告问题时提供 Python 版本、课程编号、异常类型和脱敏后的状态码。不要提交 `.env`、完整请求头或供应商错误中的敏感字段。

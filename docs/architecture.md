@@ -65,7 +65,7 @@ flowchart LR
 
 ## 后续工程化方向
 
-当前已实现可选订单数据库和pgvector检索。数据库会话、部署、生产Trace、身份与资源归属、真实电商平台仍需独立设计和验证。
+当前正式应用支持可选订单数据库和 pgvector 检索。[会话存储](../learning/postgresql/step_06_conversation_persistence.md)、[运行保障](../learning/runtime/README.md)、[MCP 网关](../learning/mcp/step_22b_order_lifecycle.md) 与 [多 Agent 协作](../learning/multi_agent/README.md) 在独立教学入口中展开。正式部署的会话存储、身份与订单归属校验、监控和真实电商平台接入仍需独立设计和验证。
 
 ## PostgreSQL与pgvector路径
 
